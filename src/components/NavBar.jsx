@@ -7,8 +7,8 @@ const NavBar = () => {
         <Navbar>
             <Container>
                 <Navbar.Brand to="/">
-                    <Image src="images/Black_pizza-logo250x250.jpg" style={{
-                        width:'50%',
+                    <Image src="images/White_pizza-logo_250x250.jpg" style={{
+                        width:'125px',
                     }}/>
                 </Navbar.Brand>
                 <Nav>
