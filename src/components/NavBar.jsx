@@ -4,24 +4,23 @@ import { LinkContainer } from "react-router-bootstrap";
 
 const NavBar = () => {
     return(
-        <NavBar>
+        <Navbar>
             <Container>
                 <Navbar.Brand to="/">
-                    <Image src="images/logo.jpg"/>
+                    <Image src="images/Black_pizza-logo250x250.jpg" style={{
+                        width:'50%',
+                    }}/>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
+                <Nav>
                     <LinkContainer to="/login" activeClassName>
                         <Nav.Link>Login</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/panier" activeClassName>
                         <Nav.Link>Panier</Nav.Link>
                     </LinkContainer>
-                    </Nav>
-                </Navbar.Collapse>
+                </Nav>
             </Container>
-        </NavBar>
+        </Navbar>
     )
 }
 
