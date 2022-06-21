@@ -26,7 +26,7 @@ const TopBar = () => {
                         <Nav.Link>Contact</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="Policy" activeClassName>
-                        <Nav.Link>Terms and Policy</Nav.Link>
+                        <Nav.Link>CGV</Nav.Link>
                     </LinkContainer>
                 </Nav>
                 </Navbar.Collapse>

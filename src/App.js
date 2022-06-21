@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Tooltip } from 'react-bootstrap';
 import TopBar from './components/TopBar';
+import NavBar from './components/NavBar';
 import About from './pages/About';
 import Contact from './pages/Contact';
 
