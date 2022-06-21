@@ -8,7 +8,9 @@ const topBar = () => {
         <>
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
-                <h6 className="text-light">Dymmy Data</h6>
+            <Navbar.Brand href="#home">Pizza</Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ms-auto d-flex">
                     <LinkContainer to="/">
                         <Nav.Link>Home</Nav.Link>
@@ -23,6 +25,7 @@ const topBar = () => {
                         <Nav.Link>Terms and Policy</Nav.Link>
                     </LinkContainer>
                 </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
         </>
