@@ -4,17 +4,16 @@ import { LinkContainer } from "react-router-bootstrap";
 import { NavLink } from "react-router-dom";
 import {MdLocalOffer} from 'react-icons/md';
 
-const topBar = () => {
+const TopBar = () => {
     return (
         <>
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
-            <Navbar.Brand href="#home">Pizza</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <h6 className="text-warning">
                     <MdLocalOffer className="text-warning mx-4"></MdLocalOffer>
                     Livraison gratuite à domicile pour toute commande superieur à 50€
                 </h6>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ms-auto d-flex">
                     <LinkContainer to="/" activeClassName>
@@ -37,4 +36,4 @@ const topBar = () => {
     );
 };
 
-export default topBar;
+export default TopBar;
