@@ -25,7 +25,7 @@ const TopBar = () => {
                     <LinkContainer to="contact" activeClassName>
                         <Nav.Link>Contact</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="Policy" activeClassName>
+                    <LinkContainer to="policy" activeClassName>
                         <Nav.Link>CGV</Nav.Link>
                     </LinkContainer>
                 </Nav>

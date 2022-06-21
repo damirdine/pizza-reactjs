@@ -6,6 +6,7 @@ import TopBar from './components/TopBar';
 import NavBar from './components/NavBar';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Policy from "./pages/Policy"
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/Contact" element={<Contact/>}/>
+      </Routes>
+      <Routes>
+        <Route path="/Policy" element={<Policy/>}/>
       </Routes>
     </BrowserRouter>
   );
