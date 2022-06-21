@@ -26,6 +26,9 @@ const About = () => {
                 <Col md={3}>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque harum dignissimos vel, amet error veritatis eaque neque sequi et odio ad exercitationem alias ratione quas soluta ipsa voluptatum optio ullam numquam aliquam! Laudantium eligendi corrupti id commodi nam cupiditate quaerat, veniam vero eius accusantium, eos molestiae numquam velit, et magni!</p>
                 </Col>
+                <Col md={3}>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque harum dignissimos vel, amet error veritatis eaque neque sequi et odio ad exercitationem alias ratione quas soluta ipsa voluptatum optio ullam numquam aliquam! Laudantium eligendi corrupti id commodi nam cupiditate quaerat, veniam vero eius accusantium, eos molestiae numquam velit, et magni!</p>
+                </Col>
             </Row>
         </Container>
   
