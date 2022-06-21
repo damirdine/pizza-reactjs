@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar,Nav,Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { NavLink } from "react-router-dom";
+import {MdLocalOffer} from 'react-icons/md';
 
 const topBar = () => {
     return (
@@ -10,18 +11,22 @@ const topBar = () => {
             <Container fluid>
             <Navbar.Brand href="#home">Pizza</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <h6 className="text-warning">
+                    <MdLocalOffer className="text-warning mx-4"></MdLocalOffer>
+                    Livraison gratuite à domicile pour toute commande superieur à 50€
+                </h6>
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ms-auto d-flex">
-                    <LinkContainer to="/">
+                    <LinkContainer to="/" activeClassName>
                         <Nav.Link>Home</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="about">
+                    <LinkContainer to="about" activeClassName>
                         <Nav.Link>About us</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="contact">
+                    <LinkContainer to="contact" activeClassName>
                         <Nav.Link>Contact</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="Policy">
+                    <LinkContainer to="Policy" activeClassName>
                         <Nav.Link>Terms and Policy</Nav.Link>
                     </LinkContainer>
                 </Nav>
