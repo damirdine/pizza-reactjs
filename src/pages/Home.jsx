@@ -1,8 +1,8 @@
 import React from "react";
-import AllPizza from "../pizza-data.js";
 import { Container,Row,Col } from "react-bootstrap";
+import AllPizza from "../pizza-data.js";
 import Pizza from "../components/Pizza";
-
+const pizzaBackend = "http://localhost:8080/pizzas"
 const Home = () => {
     return (
         <Container>

@@ -24,7 +24,7 @@ const Pizza = (props) => {
                 <Card.Text>
                 <Row>
                     <Col md={6}>
-                        <h6>Taille :
+                        <h6>Taille : <br/>
                             <select name="tailles" value={taille}
                                 onChange={getTaille}>
                                 {
