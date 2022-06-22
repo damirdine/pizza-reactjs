@@ -9,6 +9,7 @@ const db = monk("localhost:27017/pizzas");
 const pizzasRouter = require('./routes/pizzas');
 
 const app = express();
+const port = 8080
 
 app.use(function(req,res,next){
   req.db = db;
@@ -18,4 +19,4 @@ app.use(function(req,res,next){
 app.use('/pizzas', pizzasRouter);
 // app.use('/users', usersRouter);
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || port);
