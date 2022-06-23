@@ -5,6 +5,7 @@
 - Passé des valeurs au composants via les props
 - Utilisé le Hook d’état (`useState`)
 - stylé avec Bootstrap.
+-  gerer un panier en react
 ------
 In the project directory, you can run:
 
