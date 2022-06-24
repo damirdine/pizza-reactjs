@@ -3,6 +3,8 @@ import {Navbar, Nav, Container, Image} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
 const NavBar = () => {
+    let nbrOfCartItem = 0
+
     return(
         <Navbar>
             <Container>
@@ -12,11 +14,11 @@ const NavBar = () => {
                     }}/>
                 </Navbar.Brand>
                 <Nav>
-                    <LinkContainer to="/login" activeClassName>
+                    <LinkContainer to="/Login" activeClassName>
                         <Nav.Link>Login</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/panier" activeClassName>
-                        <Nav.Link>Panier</Nav.Link>
+                    <LinkContainer to="/Cart" activeClassName>
+                        <Nav.Link>Panier ({nbrOfCartItem})</Nav.Link>
                     </LinkContainer>
                 </Nav>
             </Container>

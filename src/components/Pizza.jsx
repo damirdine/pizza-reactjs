@@ -1,19 +1,30 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { Card,Button, Row,Col ,Modal,Image} from "react-bootstrap";
 
 const Pizza = (props) => {
     const [show, setShow] = useState(false);
-    const [taille, setTaille] = useState("small");
-    const [quantite, setQuantite] = useState(1);
+    const [size, setSize] = useState("small");
+    const [quantity, setQuantity] = useState(1);
+    const [name, setName] = useState();
 
-    const getTaille= (e)=> {const taille = e.target.value;setTaille(taille);}
-    const getQuantite= (e)=> {const quantite = e.target.value;setQuantite(quantite);}
+    const getSize= (e)=> {const size = e.target.value;setSize(size);}
+    const getQuantity= (e)=> {const quantity = e.target.value;setQuantity(quantity);}
+    const getName= (e)=> {const name = e.target.value;setName(name);}
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-
-
+    let [nbrOfCartItem,increment] = ()=>{nbrOfCartItem++};
+    let AddToCart = () => {
+        let product ={
+            name : props.lapizza.name,
+            quantity : quantity,
+            size : size
+        }
+        console.log(product)
+    }
+    useEffect(()=>{
+        
+    },[nbrOfCartItem])
     return (
         <>
         <Card className="mb-4" >
@@ -25,17 +36,17 @@ const Pizza = (props) => {
                 <Row>
                     <Col md={6}>
                         <h6>Taille : <br/>
-                            <select name="tailles" value={taille}
-                                onChange={getTaille}>
+                            <select name="size" value={size}
+                                onChange={getSize}>
                                 {
-                                    props.lapizza.varients.map(taille =>(<option value={taille}>{taille}</option>))
+                                    props.lapizza.varients.map(size =>(<option value={size}>{size}</option>))
                                 }
                             </select>
                         </h6>
                     </Col>
                     <Col md={6}>
                         <h6>Quantié : <br/>
-                            <select name="quantite" value={quantite} onChange={getQuantite}>
+                            <select name="quantity" value={quantity} onChange={getQuantity}>
                                 {
                                     [...Array(10).keys()].map((v,i)=> (<option value={i+1}>{i+1}</option>))
                                 }
@@ -46,10 +57,10 @@ const Pizza = (props) => {
                 </Card.Text>
                     <Row>
                         <Col md={6}>
-                            <p>Prix : {props.lapizza.prices[0][taille] * quantite} €</p>
+                            <p>Prix : {props.lapizza.prices[0][size] * quantity} €</p>
                         </Col>
                         <Col md={6}>
-                            <Button variant="warning">Add to Cart</Button>
+                            <Button variant="warning" onClick={AddToCart}>Add to Cart</Button>
                         </Col>
                     </Row>
             </Card.Body>
