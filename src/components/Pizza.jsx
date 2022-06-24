@@ -5,26 +5,30 @@ const Pizza = (props) => {
     const [show, setShow] = useState(false);
     const [size, setSize] = useState("small");
     const [quantity, setQuantity] = useState(1);
-    const [name, setName] = useState();
+
+    const [nbrOfCartItem, setCartItem] = useState(0);
+    const [CartList, setCartList] = useState([]);
 
     const getSize= (e)=> {const size = e.target.value;setSize(size);}
     const getQuantity= (e)=> {const quantity = e.target.value;setQuantity(quantity);}
-    const getName= (e)=> {const name = e.target.value;setName(name);}
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    let [nbrOfCartItem,increment] = ()=>{nbrOfCartItem++};
+
     let AddToCart = () => {
         let product ={
             name : props.lapizza.name,
             quantity : quantity,
             size : size
         }
-        console.log(product)
+        setCartItem(nbrOfCartItem+1)
+        setCartList(CartList.push(product))
+        console.log(CartList)
+        //sessionStorage.setItem('Cart', JSON.stringify(Cart));
     }
-    useEffect(()=>{
-        
-    },[nbrOfCartItem])
+    // useEffect(()=>{
+
+    // },[Cart])
     return (
         <>
         <Card className="mb-4" >
