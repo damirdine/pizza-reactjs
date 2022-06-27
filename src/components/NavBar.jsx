@@ -1,10 +1,9 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import {Navbar, Nav, Container, Image} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
 const NavBar = () => {
-    let nbrOfCartItem = 0
-
+    const [nbrOfCartItem, setCartItem] = useState(0);
     return(
         <Navbar>
             <Container>

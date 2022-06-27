@@ -16,19 +16,14 @@ const Pizza = (props) => {
     const handleShow = () => setShow(true);
 
     let AddToCart = () => {
-        let product ={
-            name : props.lapizza.name,
-            quantity : quantity,
-            size : size
-        }
+   
         setCartItem(nbrOfCartItem+1)
-        setCartList(CartList.push(product))
-        console.log(CartList)
+        console.log(nbrOfCartItem)
         //sessionStorage.setItem('Cart', JSON.stringify(Cart));
     }
-    // useEffect(()=>{
-
-    // },[Cart])
+    useEffect(()=>{
+        document.title = nbrOfCartItem
+    },[])
     return (
         <>
         <Card className="mb-4" >
