@@ -2,12 +2,11 @@ import React,{useEffect, useState} from "react";
 import { Card,Button, Row,Col ,Modal,Image} from "react-bootstrap";
 
 const Pizza = (props) => {
+    const {ItemCounter} = props;
     const [show, setShow] = useState(false);
     const [size, setSize] = useState("small");
     const [quantity, setQuantity] = useState(1);
 
-    const [nbrOfCartItem, setCartItem] = useState(0);
-    const [CartList, setCartList] = useState([]);
 
     const getSize= (e)=> {const size = e.target.value;setSize(size);}
     const getQuantity= (e)=> {const quantity = e.target.value;setQuantity(quantity);}
@@ -15,15 +14,6 @@ const Pizza = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    let AddToCart = () => {
-   
-        setCartItem(nbrOfCartItem+1)
-        console.log(nbrOfCartItem)
-        //sessionStorage.setItem('Cart', JSON.stringify(Cart));
-    }
-    useEffect(()=>{
-        document.title = nbrOfCartItem
-    },[])
     return (
         <>
         <Card className="mb-4" >
@@ -59,7 +49,7 @@ const Pizza = (props) => {
                             <p>Prix : {props.lapizza.prices[0][size] * quantity} €</p>
                         </Col>
                         <Col md={6}>
-                            <Button variant="warning" onClick={AddToCart}>Add to Cart</Button>
+                            <Button variant="warning" onClick={()=>{console.log(props.ItemCounter)}}>Add to Cart</Button>
                         </Col>
                     </Row>
             </Card.Body>

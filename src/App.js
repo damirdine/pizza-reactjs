@@ -8,18 +8,26 @@ import Contact from './pages/Contact';
 import Policy from "./pages/Policy";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
+import { useState } from 'react';
 
 function App() {
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  const ItemCounter = () => {
+    setCartItemsCount(
+      console.log(cartItemsCount+1)
+    )
+  }
+
   return (
     <BrowserRouter>
       <TopBar/>
-      <NavBar/>
+      <NavBar cartItemsCount={cartItemsCount}/>
       <Routes>
       <Route path="/" element={<Home/>}/>
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
-        <Route path="/Cart" element={<Cart/>}/>
+        <Route path="/Cart" element={<Cart ItemCounter={ItemCounter} />}/>
       </Routes>
     </BrowserRouter>
   );

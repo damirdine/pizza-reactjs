@@ -10,7 +10,8 @@ const MyPizzaList = () => {
 }
 
 
-let Cart = () =>{
+let Cart = (props) =>{
+    const {} = props
     return(
         <Container>
             <Row gap={3}>
