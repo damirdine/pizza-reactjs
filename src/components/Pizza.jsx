@@ -49,7 +49,7 @@ const Pizza = (props) => {
                             <p>Prix : {props.lapizza.prices[0][size] * quantity} €</p>
                         </Col>
                         <Col md={6}>
-                            <Button variant="warning" onClick={()=>{console.log(props.ItemCounter)}}>Add to Cart</Button>
+                            <Button variant="warning" onClick={()=>{console.log(props.lapizza.name,)}}>Add to Cart</Button>
                         </Col>
                     </Row>
             </Card.Body>
