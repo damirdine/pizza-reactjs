@@ -8,10 +8,11 @@ import Contact from './pages/Contact';
 import Policy from "./pages/Policy";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-import { useState } from 'react';
+import { React,useState } from 'react';
 
 function App() {
   const [cartItemsCount, setCartItemsCount] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
   const ItemCounter = () => {
     setCartItemsCount(
       console.log(cartItemsCount+1)

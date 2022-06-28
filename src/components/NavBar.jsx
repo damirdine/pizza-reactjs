@@ -2,9 +2,8 @@ import React,{useEffect, useState} from "react";
 import {Navbar, Nav, Container, Image} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
-const NavBar = (props) => {
-    const {cartItemsCount} = props;
-    const [, setCartItem] = useState(0);
+const NavBar = () => {
+
     return(
         <Navbar>
             <Container>
@@ -18,7 +17,7 @@ const NavBar = (props) => {
                         <Nav.Link>Login</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/Cart" activeClassName>
-                        <Nav.Link>Panier ({cartItemsCount})</Nav.Link>
+                        <Nav.Link>Panier ({nbrOfCartItem})</Nav.Link>
                     </LinkContainer>
                 </Nav>
             </Container>
