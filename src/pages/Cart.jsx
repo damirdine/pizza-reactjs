@@ -14,11 +14,15 @@ let Cart = ({cartItems}) =>{
     console.log(cartItems)
     return(
         <Container>
-            {
-                <Row gap={3}>
-                    <h1>hello</h1>
-                </Row>
-            }
+            <h2>Panier</h2>
+            {cartItems.length === 0 && (
+                <h3 gap={3} className="text-center">
+                    Panier vide
+                </h3>
+            )}
+            <Row gap={3}>
+            </Row>
+            
         </Container>
     )
 }

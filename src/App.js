@@ -11,19 +11,21 @@ import Cart from "./pages/Cart";
 import { React,useState } from 'react';
 
 function App() {
-  const [cartItemsCount, setCartItemsCount] = useState(0);
-  //const [cartItems, setCartItems] = useState([]);
-
+  const [cartItems,setCartItems] = useState([])
+  const addToCart = (product) => {
+    //setCartItems([...cartItems],product)
+    console.log('Product is  add to cart')
+  }
   return (
     <BrowserRouter>
       <TopBar/>
-      <NavBar cartItemsCount={cartItemsCount}/>
+      <NavBar cartItems={cartItems}/>
       <Routes>
-      <Route path="/" element={<Home cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount}/>}/>
+      <Route path="/" element={<Home cartItems={cartItems} addToCart={addToCart}/>}/>
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
-        <Route path="/Cart" element={<Cart/>}/>
+        <Route path="/Cart" element={<Cart cartItems={cartItems}/>}/>
       </Routes>
     </BrowserRouter>
   );
