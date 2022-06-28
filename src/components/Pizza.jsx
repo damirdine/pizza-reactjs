@@ -1,7 +1,7 @@
 import React,{ useState} from "react";
 import { Card,Button, Row,Col ,Modal,Image} from "react-bootstrap";
 
-const Pizza = (props,{addToCart}) => {
+const Pizza = (props) => {
     const [show, setShow] = useState(false);
     const [size, setSize] = useState("small");
     const [quantity, setQuantity] = useState(1);
@@ -52,7 +52,7 @@ const Pizza = (props,{addToCart}) => {
                             <p>Prix : {props.lapizza.prices[0][size] * quantity} €</p>
                         </Col>
                         <Col md={6}>
-                            <Button variant="warning" onClick={()=> {addToCart(props.lapizza)}}>Add to Cart</Button>
+                            <Button variant="warning" onClick={()=> {props.addToCart(getcartItem)}}>Add to Cart</Button>
                         </Col>
                     </Row>
             </Card.Body>
