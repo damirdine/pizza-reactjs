@@ -12,23 +12,18 @@ import { React,useState } from 'react';
 
 function App() {
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
-  const ItemCounter = () => {
-    setCartItemsCount(
-      console.log(cartItemsCount+1)
-    )
-  }
+  //const [cartItems, setCartItems] = useState([]);
 
   return (
     <BrowserRouter>
       <TopBar/>
       <NavBar cartItemsCount={cartItemsCount}/>
       <Routes>
-      <Route path="/" element={<Home/>}/>
+      <Route path="/" element={<Home cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount}/>}/>
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
-        <Route path="/Cart" element={<Cart ItemCounter={ItemCounter} />}/>
+        <Route path="/Cart" element={<Cart/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -1,8 +1,8 @@
-import React,{useEffect, useState} from "react";
+import React,{ useState} from "react";
 import { Card,Button, Row,Col ,Modal,Image} from "react-bootstrap";
 
-const Pizza = (props) => {
-    const {ItemCounter} = props;
+const Pizza = (props,{cartItemsCount,setCartItemsCount}) => {
+    console.log(props.cartItemsCount)
     const [show, setShow] = useState(false);
     const [size, setSize] = useState("small");
     const [quantity, setQuantity] = useState(1);
@@ -13,7 +13,7 @@ const Pizza = (props) => {
             size: size,
             quantity : quantity,
         }
-        console.log(cartItem)
+        setCartItemsCount = () =>{cartItemsCount+=1}
     }
     const getSize= (e)=> {const size = e.target.value;setSize(size);}
     const getQuantity= (e)=> {const quantity = e.target.value;setQuantity(quantity);}
