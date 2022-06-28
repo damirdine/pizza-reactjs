@@ -1,7 +1,7 @@
-import React,{ useState} from "react";
+import React,{ useState,useEffect} from "react";
 import { Card,Button, Row,Col ,Modal,Image} from "react-bootstrap";
 
-const Pizza = (props) => {
+const Pizza = ({lapizza,addToCart}) => {
     const [show, setShow] = useState(false);
     const [size, setSize] = useState("small");
     const [quantity, setQuantity] = useState(1);
@@ -12,17 +12,15 @@ const Pizza = (props) => {
     const handleShow = () => setShow(true);
 
     const getcartItem = () => {
-        let Item={name : props.lapizza.name,
-        size: size,
-        quantity : quantity}
+        let Item={name : lapizza.name,size: size,quantity : parseInt(quantity)}
         return Item
     }
     return (
         <>
         <Card className="mb-4" >
-            <Card.Img onClick={handleShow} variant="top" src={props.lapizza.image} />
+            <Card.Img onClick={handleShow} variant="top" src={lapizza.image} />
             <Card.Body>
-                <Card.Title onClick={handleShow}>{props.lapizza.name}</Card.Title>
+                <Card.Title onClick={handleShow}>{lapizza.name}</Card.Title>
                 <hr />
                 <Card.Text>
                 <Row>
@@ -31,7 +29,7 @@ const Pizza = (props) => {
                             <select name="size" value={size}
                                 onChange={getSize}>
                                 {
-                                    props.lapizza.varients.map(size =>(<option value={size}>{size}</option>))
+                                    lapizza.varients.map(size =>(<option value={size}>{size}</option>))
                                 }
                             </select>
                         </h6>
@@ -49,24 +47,24 @@ const Pizza = (props) => {
                 </Card.Text>
                     <Row>
                         <Col md={6}>
-                            <p>Prix : {props.lapizza.prices[0][size] * quantity} €</p>
+                            <p>Prix : {lapizza.prices[0][size] * quantity} €</p>
                         </Col>
                         <Col md={6}>
-                            <Button variant="warning" onClick={()=> {props.addToCart(getcartItem)}}>Add to Cart</Button>
+                            <Button variant="warning" onClick={()=> {addToCart(getcartItem())}}>Add to Cart</Button>
                         </Col>
                     </Row>
             </Card.Body>
         </Card>
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>{props.lapizza.name}</Modal.Title>
+                <Modal.Title>{lapizza.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Image src={props.lapizza.image} style={{
+                <Image src={lapizza.image} style={{
                     width:"100%",
                 }}/>
                 <h5>Description</h5>
-                <p>{props.lapizza.description}</p>
+                <p>{lapizza.description}</p>
             </Modal.Body>
         </Modal>
         </>

@@ -20,8 +20,13 @@ let Cart = ({cartItems}) =>{
                     Panier vide
                 </h3>
             )}
-            <Row gap={3}>
-            </Row>
+            {cartItems.map((item) => (
+                <Row>
+                    <h3>{item.name}</h3>
+                    <h3>{item.size}</h3>
+                    <h3>{item.quantity}</h3>
+                </Row>    
+            ))}
             
         </Container>
     )

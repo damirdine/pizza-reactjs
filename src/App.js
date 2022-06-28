@@ -13,9 +13,10 @@ import { React,useState } from 'react';
 function App() {
   const [cartItems,setCartItems] = useState([])
   const addToCart = (product) => {
-    setCartItems([...cartItems],product)
-    console.log('Product is  add to cart')
+    setCartItems([...cartItems,product])
+    console.log('Product is  add to cart', product,cartItems)
   }
+  
   return (
     <BrowserRouter>
       <TopBar/>
