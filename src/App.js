@@ -15,13 +15,17 @@ function App() {
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
     if(isExist){
-      setCartItems(cartItems.map((item)=> item.name===product.name ? console.log(item):item))
-      console.log('isExist')
+      console.log('isExist',product,isExist)
+      setCartItems(cartItems.map((item) => isExist ? {...isExist,quantity: isExist.quantity+product.quantity}:item))
+      console.log('And update do : ',product)
     }
     setCartItems([...cartItems,product])
     console.log('Product is  add to cart', product,cartItems)
   }
-  //const deleteFromCart = (product)=>{}
+  const deleteFromCart = (product)=>{
+    setCartItems((products) => products.filter((_, index) => index !== 0));
+    console.log('Product is deleteFromCart', product,cartItems)
+  }
   
   return (
     <BrowserRouter>
@@ -32,7 +36,7 @@ function App() {
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
-        <Route path="/Cart" element={<Cart cartItems={cartItems}/>}/>
+        <Route path="/Cart" element={<Cart cartItems={cartItems} deleteFromCart={deleteFromCart}/>}/>
       </Routes>
     </BrowserRouter>
   );
