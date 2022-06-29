@@ -11,11 +11,6 @@ const MyPizzaList = () => {
 
 
 let Cart = ({cartItems,deleteFromCart}) =>{
-    // const [totalCart,setTotalCart] = useState(0)
-    // setTotalCart(totalCart = cartItems.map((item)=>{
-        
-    // }))
-    //useEffect(() => {<Home cartItems={cartItems}/>} );
     return(
         <Container>
             <h2>Panier</h2>

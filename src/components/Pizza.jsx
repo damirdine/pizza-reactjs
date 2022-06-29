@@ -1,7 +1,7 @@
 import React,{ useState,useEffect} from "react";
 import { Card,Button, Row,Col ,Modal,Image} from "react-bootstrap";
 
-const Pizza = ({lapizza,addToCart}) => {
+const Pizza = ({lapizza,cartItems,addToCart}) => {
     const [show, setShow] = useState(false);
     const [size, setSize] = useState("small");
     const [quantity, setQuantity] = useState(1);

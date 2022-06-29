@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Container,Row,Col } from "react-bootstrap";
 import AllPizza from "../pizza-data.js";
 import Pizza from "../components/Pizza";
 
 const Home = ({cartItems,addToCart}) => {
-
+    useEffect(()=>{
+        console.log(cartItems)
+      },[cartItems])
     return (
         <Container>
             <Row gap={3}>
