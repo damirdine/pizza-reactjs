@@ -27,13 +27,13 @@ let Cart = ({cartItems}) =>{
                         <button onClick={()=>{
                             document.getElementById(item.name+'-'+item.size).value++  
                         }}>+</button>
-                        <input id={item.name+'-'+item.size} type="number" value={item.quantity} min="1"/>
+                        <input id={item.name+'-'+item.size} type="number" value={item.quantity} min="2"/>
                         <button onClick={()=>{
-                            const quantityIs1 = document.getElementById(item.name + '-' + item.size).value === 1;
-                            if(!quantityIs1){
-                                document.getElementById(item.name+'-'+item.size).value--
+                            const quantityIs1 = document.getElementById(item.name + '-' + item.size).value <= 0 || document.getElementById(item.name + '-' + item.size).value===0;
+                            if(quantityIs1){
+                                document.getElementById(item.name+'-'+item.size).value = 1
                             }
-                            document.getElementById(item.name+'-'+item.size).value=1
+                            document.getElementById(item.name+'-'+item.size).value--
                         }}>-</button>
 
                     </div>
