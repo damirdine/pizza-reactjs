@@ -1,16 +1,16 @@
-import React from "react";
+import React,{useState}from "react";
 import { Container, Row } from "react-bootstrap";
 
 const MyPizzaList = () => {
     fetch("http://localhost:8080/pizzas")
     .then((res)=>(res.json()))
-    .then((json)=>json)
+    .then((json)=>console.log(json))
     .catch((err)=>(console.log(err)))
 }
 
 
-let Cart = ({cartItems}) =>{
-    console.log(cartItems)
+let Cart = ({cartItems,deleteFromCart}) =>{
+    const [totalCart,setTotalCart] = useState(0)
     return(
         <Container>
             <h2>Panier</h2>
@@ -37,7 +37,7 @@ let Cart = ({cartItems}) =>{
                         }}>-</button>
 
                     </div>
-                    <button>x</button>
+                    <button onClick={()=> {deleteFromCart(item)}}>x</button>
                 </Row>    
             ))}
             
