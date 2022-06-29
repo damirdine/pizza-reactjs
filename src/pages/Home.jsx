@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import { Container,Row,Col } from "react-bootstrap";
 import AllPizza from "../pizza-data.js";
 import Pizza from "../components/Pizza";

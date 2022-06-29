@@ -8,27 +8,24 @@ import Contact from './pages/Contact';
 import Policy from "./pages/Policy";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-import { React,useState,useEffect } from 'react';
+import { React,useState } from 'react';
 
 function App() {
   const [cartItems,setCartItems] = useState([])
+
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
     if(isExist){
-      console.log(isExist)
       isExist.quantity += product.quantity
-      console.log(isExist)
       setCartItems(cartItems)
     }else{
       setCartItems([...cartItems,product])
-      console.log('Product is  add to cart', product,cartItems)
     }
   }
+
   const deleteFromCart = (product)=>{
     setCartItems((products) => products.filter((_, index) => index !== 0));
-    console.log('Product is deleteFromCart', product,cartItems)
   }
-  console.log(cartItems)
   
   return (
     <BrowserRouter>

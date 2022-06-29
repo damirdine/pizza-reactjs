@@ -1,7 +1,8 @@
-import React,{useState,useEffect}from "react";
+import React,{useState}from "react";
 import { Container, Row } from "react-bootstrap";
 
 let Cart = ({cartItems,deleteFromCart}) =>{
+    
     return(
         <Container>
             <h2>Panier</h2>
