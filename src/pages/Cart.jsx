@@ -1,14 +1,5 @@
 import React,{useState,useEffect}from "react";
 import { Container, Row } from "react-bootstrap";
-import Home from "./Home";
-
-const MyPizzaList = () => {
-    fetch("http://localhost:8080/pizzas")
-    .then((res)=>(res.json()))
-    .then((json)=>console.log(json))
-    .catch((err)=>(console.log(err)))
-}
-
 
 let Cart = ({cartItems,deleteFromCart}) =>{
     return(
