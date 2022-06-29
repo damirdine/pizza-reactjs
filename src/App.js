@@ -15,12 +15,19 @@ function App() {
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
     if(isExist){
-      console.log('isExist',product,isExist)
-      setCartItems(cartItems.map((item) => isExist ? {...isExist,quantity: isExist.quantity+product.quantity}:item))
-      console.log('And update do : ',product)
+      console.log(cartItems)
+      console.log('isExist',product.quantity,isExist)
+      setCartItems(cartItems.map((item) => {
+        if(item.name === product.name && item.size === product.size){
+          item.quantity += product.quantity
+          console.log(item)
+        }
+      } ))
+      console.log(cartItems)
+    }else{
+      setCartItems([...cartItems,product])
+      console.log('Product is  add to cart', product,cartItems)
     }
-    setCartItems([...cartItems,product])
-    console.log('Product is  add to cart', product,cartItems)
   }
   const deleteFromCart = (product)=>{
     setCartItems((products) => products.filter((_, index) => index !== 0));

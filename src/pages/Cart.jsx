@@ -1,5 +1,6 @@
-import React,{useState}from "react";
+import React,{useState,useEffect}from "react";
 import { Container, Row } from "react-bootstrap";
+import Home from "./Home";
 
 const MyPizzaList = () => {
     fetch("http://localhost:8080/pizzas")
@@ -10,7 +11,11 @@ const MyPizzaList = () => {
 
 
 let Cart = ({cartItems,deleteFromCart}) =>{
-    const [totalCart,setTotalCart] = useState(0)
+    // const [totalCart,setTotalCart] = useState(0)
+    // setTotalCart(totalCart = cartItems.map((item)=>{
+        
+    // }))
+    //useEffect(() => {<Home cartItems={cartItems}/>} );
     return(
         <Container>
             <h2>Panier</h2>
@@ -40,7 +45,10 @@ let Cart = ({cartItems,deleteFromCart}) =>{
                     <button onClick={()=> {deleteFromCart(item)}}>x</button>
                 </Row>    
             ))}
-            
+            <h3>Total : {cartItems.length} €</h3>
+            <Row>
+
+            </Row>
         </Container>
     )
 }

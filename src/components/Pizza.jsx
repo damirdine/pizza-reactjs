@@ -12,8 +12,8 @@ const Pizza = ({lapizza,addToCart}) => {
     const handleShow = () => setShow(true);
 
     const getcartItem = () => {
-        let Item={name : lapizza.name,size: size,quantity : parseInt(quantity)}
-        return Item
+        let cartItem={name : lapizza.name,size: size,quantity : parseInt(quantity)}
+        return cartItem
     }
     return (
         <>
