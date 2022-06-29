@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import CartItem from "../components/CartItem"
 
 const MyPizzaList = () => {
     fetch("http://localhost:8080/pizzas")
@@ -24,7 +23,21 @@ let Cart = ({cartItems}) =>{
                 <Row>
                     <h3>{item.name}</h3>
                     <h3>{item.size}</h3>
-                    <h3>{item.quantity}</h3>
+                    <div>
+                        <button onClick={()=>{
+                            document.getElementById(item.name+'-'+item.size).value++  
+                        }}>+</button>
+                        <input id={item.name+'-'+item.size} type="number" value={item.quantity} min="1"/>
+                        <button onClick={()=>{
+                            const quantityIs1 = document.getElementById(item.name + '-' + item.size).value === 1;
+                            if(!quantityIs1){
+                                document.getElementById(item.name+'-'+item.size).value--
+                            }
+                            document.getElementById(item.name+'-'+item.size).value=1
+                        }}>-</button>
+
+                    </div>
+                    <button>x</button>
                 </Row>    
             ))}
             

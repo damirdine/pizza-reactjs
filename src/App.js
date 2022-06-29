@@ -13,9 +13,15 @@ import { React,useState } from 'react';
 function App() {
   const [cartItems,setCartItems] = useState([])
   const addToCart = (product) => {
+    let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
+    if(isExist){
+      setCartItems(cartItems.map((item)=> item.name===product.name ? console.log(item):item))
+      console.log('isExist')
+    }
     setCartItems([...cartItems,product])
     console.log('Product is  add to cart', product,cartItems)
   }
+  //const deleteFromCart = (product)=>{}
   
   return (
     <BrowserRouter>
