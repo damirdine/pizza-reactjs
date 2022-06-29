@@ -4,16 +4,14 @@ import { Container, Row } from "react-bootstrap";
 let Cart = ({cartItems,deleteFromCart}) =>{
     const [pizzaData, setPizzasData] = useState(null);
     
-    useEffect(()=> {
-        fetch("http://localhost:8080/pizzas")
-            .then(response => {
-                if(response.ok){
-                    return response.json()
-                }
-            })
-            .then(data => {console.log(data)})
-            .catch(err => {console.log(err,"WE CATCH AN ERROR")})
-    })
+    fetch("http://localhost:8080/pizzas")
+        .then(response => {
+            if(response.ok){
+                return response.json()
+            }
+        })
+        .then(data => {setPizzasData(data)})
+        .catch(err => {console.log(err,"WE CATCH AN ERROR")})
 
     console.log(pizzaData)
 

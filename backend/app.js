@@ -7,9 +7,11 @@ const db = monk("localhost:27017/pizzas");
 
 // const usersRouter = require('./routes/users');
 const pizzasRouter = require('./routes/pizzas');
+const cors = require('cors')
 
 const app = express();
 const port = 8080
+app.use(cors());
 
 app.use(function(req,res,next){
   req.db = db;
