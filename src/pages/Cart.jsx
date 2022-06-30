@@ -3,8 +3,6 @@ import { Container, Row } from "react-bootstrap";
 import CartItem from "../components/CartItem";
 let Cart = ({cartItems,deleteFromCart,setCartItems,increaseQuantity,decreaseQuantity}) =>{
     const [pizzaData, setPizzasData] = useState(null);
-    const [reRender,setReRender] = useState(0);
-    console.log(reRender)
     function getPrice(item){
         fetch("http://localhost:8080/pizzas")
         .then(response => {
