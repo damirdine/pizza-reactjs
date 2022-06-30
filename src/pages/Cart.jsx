@@ -5,7 +5,7 @@ let Cart = ({cartItems,deleteFromCart,setCartItems,increaseQuantity,decreaseQuan
     const [pizzaData, setPizzasData] = useState(null);
     const [reRender,setReRender] = useState(0);
     console.log(reRender)
-    useEffect(()=>{
+    function getPrice(item){
         fetch("http://localhost:8080/pizzas")
         .then(response => {
             if(response.ok){
@@ -14,8 +14,9 @@ let Cart = ({cartItems,deleteFromCart,setCartItems,increaseQuantity,decreaseQuan
         })
         .then(data => {setPizzasData(data)})
         .catch(err => {console.log(err,"WE CATCH AN ERROR")})
-    },[cartItems])
 
+        console.log(pizzaData)
+    }
     
     return(
         <Container>
