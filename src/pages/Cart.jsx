@@ -1,13 +1,19 @@
 import React,{useState,useEffect} from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row,Button } from "react-bootstrap";
 import CartItem from "../components/CartItem";
-let Cart = ({pizzaData,cartItems,deleteFromCart,setCartItems,increaseQuantity,decreaseQuantity}) =>{
+let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
+    const [effecter,setEffecter] = useState(0);
     const [totalCart,setTotalCart] = useState(0);
     const getPrice = (CartItem) => {
         CartItem.price = pizzaData.find((pizza)=> pizza.name === CartItem.name).prices[0][CartItem.size]
     }
     cartItems.map((CartItem)=> {getPrice(CartItem)})
-    console.log(cartItems)
+
+    useEffect(()=>{
+        setTotalCart(0)
+        setTotalCart(cartItems.reduce((totalCart,item)=> totalCart+(item.price*item.quantity),0))
+        setEffecter(0)
+    },[effecter==1])
     return(
         <Container>
             <h2>Panier</h2>
@@ -18,10 +24,10 @@ let Cart = ({pizzaData,cartItems,deleteFromCart,setCartItems,increaseQuantity,de
             )}
             <Row gap={5}>
                 {cartItems.map((item) => (
-                    <CartItem item={item} price={null}deleteFromCart={deleteFromCart}/>
+                    <CartItem item={item} deleteFromCart={deleteFromCart} setEffecter={setEffecter}/>
                 ))}
             </Row>
-            <h3>Total : {cartItems.length} €</h3>
+            <h3>Total : {totalCart} €</h3>
         </Container>
     )
 }

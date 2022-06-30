@@ -11,18 +11,20 @@ import Cart from "./pages/Cart";
 import { React,useState, useEffect} from 'react';
 
 function App() {
+
+  useEffect(()=>{
+      fetch("http://localhost:8080/pizzas")
+      .then(response => {
+          if(response.ok){
+              return response.json()
+          }
+      })
+      .then(data => {setPizzasData(data)})
+      .catch(err => {console.log(err,"WE CATCH AN ERROR")})
+  },[])
+  
   const [cartItems,setCartItems] = useState([])
   const [pizzaData, setPizzasData] = useState(null);
-    useEffect(()=>{
-        fetch("http://localhost:8080/pizzas")
-        .then(response => {
-            if(response.ok){
-                return response.json()
-            }
-        })
-        .then(data => {setPizzasData(data)})
-        .catch(err => {console.log(err,"WE CATCH AN ERROR")})
-    },[])
 
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
@@ -37,19 +39,7 @@ function App() {
   const deleteFromCart = (product)=>{
     setCartItems((products) => products.filter((_, index) => index !== 0));
   }
-  const increaseQuantity = (cartItem) => {
-    cartItem.quantity++
-    console.log(cartItem)
-    setCartItems(cartItems)
-  }
-  const decreaseQuantity = (cartItem) => {
-    if(cartItem.quantity<=1){
-      cartItem.quantity = 1
-    }else{
-      cartItem.quantity--
-    }
-    console.log(cartItems)
-}
+
   return (
     <BrowserRouter>
       <TopBar/>
