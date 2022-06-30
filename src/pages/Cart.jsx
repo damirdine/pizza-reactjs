@@ -24,13 +24,12 @@ let Cart = ({cartItems,deleteFromCart,setCartItems,increaseQuantity,decreaseQuan
                     Panier vide
                 </h3>
             )}
-            {cartItems.map((item) => (
-                <CartItem item={item} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} deleteFromCart={deleteFromCart}/>
-            ))}
+            <Container>
+                {cartItems.map((item) => (
+                    <CartItem item={item} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} deleteFromCart={deleteFromCart}/>
+                ))}
+            </Container>
             <h3>Total : {cartItems.length} €</h3>
-            <Row>
-
-            </Row>
         </Container>
     )
 }
