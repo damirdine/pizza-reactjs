@@ -13,7 +13,7 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
         setTotalCart(0)
         setTotalCart(cartItems.reduce((totalCart,item)=> totalCart+(item.price*item.quantity),0))
         setEffecter(0)
-    },[effecter==1])
+    },[effecter==1,cartItems])
     return(
         <Container>
             <h2>Panier</h2>
