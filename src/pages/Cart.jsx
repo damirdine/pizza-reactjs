@@ -27,7 +27,15 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
                     <CartItem item={item} deleteFromCart={deleteFromCart} setEffecter={setEffecter}/>
                 ))}
             </Row>
-            <h3>Total : {totalCart} €</h3>
+            
+            {cartItems.length >0 && (
+                <>
+                    <h3>Total : {totalCart} €</h3>
+                    <Row>
+                        <Button variant="primary">Commander</Button>
+                    </Row>
+                </>
+            )}
         </Container>
     )
 }
