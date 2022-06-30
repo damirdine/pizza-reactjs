@@ -1,14 +1,17 @@
 import React,{useEffect, useState} from "react";
-import {Row, Nav, Container, Image} from 'react-bootstrap';
+import {Row, Col,Card, Button, Image} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
-const CartItem = ({item,increaseQuantity,decreaseQuantity,deleteFromCart}) => {
-    const [itemx,setItem] = useState(item);
+const CartItem = ({item,deleteFromCart,price}) => {
+    const [itemx,setItem] = useState();
     return(
-        <Row>       
-            <h3>{item.name}</h3>
-            <h3>{item.size}</h3>
-            <h3>{item.quantity}*  price €</h3>
+        <>
+        <Row>
+            <Col md={4}>
+                <h3>{item.name}</h3>
+                <h3>{item.size}</h3>
+                <h3>{item.quantity} *  {item.price} €</h3>
+            </Col>       
             <div>
                 <button onClick={()=>{setItem(item.quantity++)}}>+</button>
                 <input id={item.name+'-'+item.size} type="hidden" value={item.quantity} min="1"/>
@@ -18,6 +21,7 @@ const CartItem = ({item,increaseQuantity,decreaseQuantity,deleteFromCart}) => {
             </div>
             <button onClick={()=> {deleteFromCart(item)}}>x</button>
         </Row>    
+        </>
     )
 }
 

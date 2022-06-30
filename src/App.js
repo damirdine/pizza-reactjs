@@ -8,10 +8,21 @@ import Contact from './pages/Contact';
 import Policy from "./pages/Policy";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-import { React,useState } from 'react';
+import { React,useState, useEffect} from 'react';
 
 function App() {
   const [cartItems,setCartItems] = useState([])
+  const [pizzaData, setPizzasData] = useState(null);
+    useEffect(()=>{
+        fetch("http://localhost:8080/pizzas")
+        .then(response => {
+            if(response.ok){
+                return response.json()
+            }
+        })
+        .then(data => {setPizzasData(data)})
+        .catch(err => {console.log(err,"WE CATCH AN ERROR")})
+    },[])
 
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
@@ -48,7 +59,7 @@ function App() {
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
-        <Route path="/Cart" element={<Cart cartItems={cartItems} deleteFromCart={deleteFromCart} setCartItems={setCartItems} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity}/>}/>
+        <Route path="/Cart" element={<Cart cartItems={cartItems} deleteFromCart={deleteFromCart} setCartItems={setCartItems} pizzaData={pizzaData}/>}/>
       </Routes>
     </BrowserRouter>
   );
