@@ -26,7 +26,19 @@ function App() {
   const deleteFromCart = (product)=>{
     setCartItems((products) => products.filter((_, index) => index !== 0));
   }
-  
+  const increaseQuantity = (cartItem) => {
+    cartItem.quantity++
+    console.log(cartItem)
+    setCartItems(cartItems)
+  }
+  const decreaseQuantity = (cartItem) => {
+    if(cartItem.quantity<=1){
+      cartItem.quantity = 1
+    }else{
+      cartItem.quantity--
+    }
+    console.log(cartItems)
+}
   return (
     <BrowserRouter>
       <TopBar/>
@@ -36,7 +48,7 @@ function App() {
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
-        <Route path="/Cart" element={<Cart cartItems={cartItems} deleteFromCart={deleteFromCart}/>}/>
+        <Route path="/Cart" element={<Cart cartItems={cartItems} deleteFromCart={deleteFromCart} setCartItems={setCartItems} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity}/>}/>
       </Routes>
     </BrowserRouter>
   );
