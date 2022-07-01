@@ -12,7 +12,6 @@ const CartItem = ({item,deleteFromCart,setEffecter}) => {
                 <h3>{item.name}</h3>
                 <h3>{item.size}</h3>
                 <h3>{item.quantity} x {item.price} €</h3>
-                <h3>{item.price*item.quantity}</h3>
             </Col>       
             <div>
                 <button onClick={()=>{setItem(item.quantity++);setEffecter(1)}}>+</button>
