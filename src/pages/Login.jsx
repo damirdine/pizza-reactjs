@@ -20,11 +20,14 @@ function Login() {
                 <Form.Control type="password" placeholder="Password" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
+                <Form.Check type="checkbox" label="Accept the terms and conditions " />
+                <a className='d-block mt-2' href="/policy">Policy</a>
             </Form.Group>
             <Button variant="primary" type="submit">
                 Login
-            </Button>
+            </Button> 
+            <br/><span className='d-block mt-4'>Or</span>
+            <a className='d-block mt-4' href="/Register">Register</a>
         </Form>
     </Container>
   );

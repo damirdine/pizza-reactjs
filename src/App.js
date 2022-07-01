@@ -23,9 +23,9 @@ function App() {
       .then(data => {setPizzasData(data)})
       .catch(err => {console.log(err,"WE CATCH AN ERROR")})
   },[])
-  
   const [cartItems,setCartItems] = useState([])
   const [pizzaData, setPizzasData] = useState(null);
+  console.log(pizzaData)
 
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
@@ -46,7 +46,7 @@ function App() {
       <TopBar/>
       <NavBar cartItems={cartItems}/>
       <Routes>
-      <Route path="/" element={<Home cartItems={cartItems} addToCart={addToCart}/>}/>
+      <Route path="/" element={<Home cartItems={cartItems} addToCart={addToCart} pizzaData={pizzaData}/>}/>
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
