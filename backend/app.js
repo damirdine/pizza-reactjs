@@ -9,7 +9,6 @@ collection.find({},{},function(e,docs){
   docs;
 });
 
-// const usersRouter = require('./routes/users');
 const pizzasRouter = require('./routes/pizzas');
 const usersRouter = require('./routes/users')
 const cors = require('cors')
