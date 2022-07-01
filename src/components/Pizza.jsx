@@ -25,7 +25,7 @@ const Pizza = ({lapizza,addToCart}) => {
                 <Card.Text>
                 <Row>
                     <Col md={6}>
-                        <h6>Taille : <br/>
+                        <h6>Size : <br/>
                             <select name="size" value={size}
                                 onChange={getSize}>
                                 {
@@ -35,7 +35,7 @@ const Pizza = ({lapizza,addToCart}) => {
                         </h6>
                     </Col>
                     <Col md={6}>
-                        <h6>Quantié : <br/>
+                        <h6>Quantity : <br/>
                             <select name="quantity" value={quantity} onChange={getQuantity}>
                                 {
                                     [...Array(10).keys()].map((v,i)=> (<option value={i+1}>{i+1}</option>))
@@ -47,7 +47,7 @@ const Pizza = ({lapizza,addToCart}) => {
                 </Card.Text>
                     <Row>
                         <Col md={6}>
-                            <p>Prix : {lapizza.prices[0][size] * quantity} €</p>
+                            <p>Price : {lapizza.prices[0][size] * quantity} €</p>
                         </Col>
                         <Col md={6}>
                             <Button variant="warning" onClick={()=> {addToCart(getcartItem())}}>Add to Cart</Button>

@@ -16,7 +16,7 @@ const NavBar = ({cartItems}) => {
                         <Nav.Link>Login</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/Cart" activeClassName>
-                        <Nav.Link>Panier({cartItems.length})</Nav.Link>
+                        <Nav.Link>Cart({cartItems.length})</Nav.Link>
                     </LinkContainer>
                 </Nav>
             </Container>

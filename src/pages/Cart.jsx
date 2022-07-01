@@ -20,16 +20,16 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return(
-        <Container>
-            <h2>Panier</h2>
+        <Container className="mt-4">
+            <h1 className="mb-4">Cart</h1>
             {cartItems.length === 0 && (
                 <h3 gap={3} className="text-center">
                     Panier vide
                 </h3>
             )}
-            <Row gap={5}>
+            <Row className="mb-3">
                 {cartItems.map((item) => (
-                    <CartItem item={item} deleteFromCart={deleteFromCart} setEffecter={setEffecter}/>
+                    <CartItem className="mb-3" item={item} deleteFromCart={deleteFromCart} setEffecter={setEffecter}/>
                 ))}
             </Row>
             
@@ -37,7 +37,7 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
                 <>
                     <h3>Total : {totalCart} €</h3>
                     <Row>
-                        <Button variant="primary" onClick={handleShow}>Commander</Button>
+                        <Button variant="primary" onClick={handleShow}>Placing my order</Button>
                     </Row>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
