@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import {Container} from 'react-bootstrap';
 import { Link } from "react-router-dom"
 
-function BasicExample() {
+function Register() {
   return (
     <Container className='mt-4'>
         <h3>Register</h3>
@@ -33,4 +33,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default Register;

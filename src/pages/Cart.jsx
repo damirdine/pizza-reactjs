@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from "react";
 import { Container, Row,Button,Modal } from "react-bootstrap";
 import CartItem from "../components/CartItem";
+import GuestForm from "../components/GuestForm";
+import LoginForm from "../components/LoginForm";
 let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
     const [effecter,setEffecter] = useState(0);
     const [totalCart,setTotalCart] = useState(0);
@@ -19,6 +21,11 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const makeOrder = () => {
+        console.log("order make")
+        setShow(false);
+    }
     return(
         <Container className="mt-4">
             <h1 className="mb-4">Cart</h1>
@@ -41,15 +48,20 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
                     </Row>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Order info</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                        <Modal.Body>
+                            <h3>Login</h3>
+                            <LoginForm/>
+                            <span className="d-block my-2">Or</span>
+                            <GuestForm/>
+                        </Modal.Body>
                         <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
-                            Close
+                            Cancel
                         </Button>
-                        <Button variant="primary" onClick={handleClose}>
-                            Save Changes
+                        <Button variant="primary" onClick={makeOrder}>
+                            Order
                         </Button>
                         </Modal.Footer>
                     </Modal>
