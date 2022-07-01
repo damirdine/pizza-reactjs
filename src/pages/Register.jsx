@@ -1,12 +1,12 @@
-import { Container} from 'react-bootstrap';
-import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import {Container} from 'react-bootstrap';
+import { Link } from "react-router-dom"
 
-function Login() {
+function BasicExample() {
   return (
     <Container className='mt-4'>
-        <h3>Login</h3>
+        <h3>Register</h3>
         <Form className='mt-4'>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -20,14 +20,18 @@ function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Accept the terms and conditions " />
+                <a className='d-block mt-2' href="/policy">Policy</a>
+            </Form.Group>
             <Button variant="primary" type="submit">
-                Login
+                Register
             </Button> 
             <br/><span className='d-block mt-4'>Or</span>
-            <Link to="/Register">Register</Link>
+            <Link to="/Login">Login</Link>
         </Form>
     </Container>
   );
 }
 
-export default Login;
+export default BasicExample;

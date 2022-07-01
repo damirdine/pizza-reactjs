@@ -9,6 +9,7 @@ import Policy from "./pages/Policy";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import { React,useState, useEffect} from 'react';
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/Policy" element={<Policy/>}/>
         <Route path="/Login" element={<Login/>}/>
+        <Route path="/Register" element={<Register/>}/>
         <Route path="/Cart" element={<Cart cartItems={cartItems} deleteFromCart={deleteFromCart} setCartItems={setCartItems} pizzaData={pizzaData}/>}/>
       </Routes>
     </BrowserRouter>
