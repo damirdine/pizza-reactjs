@@ -25,7 +25,6 @@ function App() {
   },[])
   const [cartItems,setCartItems] = useState([])
   const [pizzaData, setPizzasData] = useState(null);
-  console.log(pizzaData)
 
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
