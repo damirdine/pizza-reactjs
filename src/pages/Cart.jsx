@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from "react";
-import { Container, Row,Button } from "react-bootstrap";
+import { Container, Row,Button,Modal } from "react-bootstrap";
 import CartItem from "../components/CartItem";
 let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
     const [effecter,setEffecter] = useState(0);
     const [totalCart,setTotalCart] = useState(0);
+    const [show, setShow] = useState(false);
+
     const getPrice = (CartItem) => {
         CartItem.price = pizzaData.find((pizza)=> pizza.name === CartItem.name).prices[0][CartItem.size]
     }
@@ -14,6 +16,9 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
         setTotalCart(cartItems.reduce((totalCart,item)=> totalCart+(item.price*item.quantity),0))
         setEffecter(0)
     },[effecter==1,cartItems])
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return(
         <Container>
             <h2>Panier</h2>
@@ -32,8 +37,22 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
                 <>
                     <h3>Total : {totalCart} €</h3>
                     <Row>
-                        <Button variant="primary">Commander</Button>
+                        <Button variant="primary" onClick={handleShow}>Commander</Button>
                     </Row>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={handleClose}>
+                            Save Changes
+                        </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </>
             )}
         </Container>
