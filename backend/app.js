@@ -4,6 +4,10 @@ const express = require('express');
 const mongo = require("mongodb");
 const monk = require("monk");
 const db = monk("localhost:27017/pizzas");
+var collection = db.get('users');
+collection.find({},{},function(e,docs){
+  docs;
+});
 
 // const usersRouter = require('./routes/users');
 const pizzasRouter = require('./routes/pizzas');
