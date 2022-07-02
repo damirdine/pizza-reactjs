@@ -13,9 +13,10 @@ import Register from "./pages/Register";
 import { React,useState, useEffect} from 'react';
 
 function App() {
-
-  useEffect(()=>{
-      fetch("http://localhost:8080/pizzas")
+  
+  const [cartItems,setCartItems] = useState([])
+  const [pizzaData, setPizzasData] = useState(()=> {
+    fetch("http://localhost:8080/pizzas")
       .then(response => {
           if(response.ok){
               return response.json()
@@ -23,9 +24,7 @@ function App() {
       })
       .then(data => {setPizzasData(data)})
       .catch(err => {console.log(err,"WE CATCH AN ERROR")})
-  },[])
-  const [cartItems,setCartItems] = useState([])
-  const [pizzaData, setPizzasData] = useState(null);
+  });
 
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
