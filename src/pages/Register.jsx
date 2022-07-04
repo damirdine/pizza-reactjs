@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container} from 'react-bootstrap';
 import { Link } from "react-router-dom"
+import AdressFrom from '../components/AdressFrom';
 
 function Register() {
   return (
@@ -25,6 +26,10 @@ function Register() {
                 <Form.Label >Confirm password</Form.Label>
                 <Form.Control type="password" placeholder="Confirm password" />
             </Form.Group>
+            <details className='mb-3'>
+                <summary className='mb-3'>Add my adress (for your next order)</summary>
+                <AdressFrom/>
+            </details>
             <Button variant="primary" type="submit">Register</Button> 
             <br/><span className='d-block mt-4'>Or</span>
             <Link to="/Login">Login</Link>
