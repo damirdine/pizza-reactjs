@@ -13,12 +13,21 @@ router.get('/', function(req, res, next) {
 router.post('/adduser',function(req,res){
   var db = req.db;
   //post value from the form 
+  console.log(req.body)
 
-  let userEmail = req.body.useremail;
-  let userFullName = req.body.userfullname;
-  let userPassword = req.body.userPassword
+  let userFullName = req.body.fullname;
+  let userEmail = req.body.email;
+  let userPassword = req.body.password;
+  let userConfirmPassword = req.body.confirmPassword;
+  let userPhoneNumber = req.body.phoneNumber;
+  let userAdress = req.body.adress;
+  let userComplement = req.body.complement;
+  let userPostCode = req.body.postCode;
+  let userCity = req.body.city;
 
-
+  if(userPassword!==userConfirmPassword){
+    return res.send("Password not Match")
+  }
   //Set the collection
   var collection = db.get('users');
       collection.insert(
@@ -26,14 +35,19 @@ router.post('/adduser',function(req,res){
           "fullname":userFullName,
           "email": userEmail,
           "password":userPassword,
-          "location":userLocation,
-          "gender":userGender
+          "phone_number":userPhoneNumber,
+          "adress":{
+            "adress":userAdress,
+            "complement": userComplement,
+            "postcode": userPostCode,
+            "city": userCity
+          }
         }, 
         function(err){
           if(err){
             res.send("Problem for adding user to database.")
           }
-          res.redirect("userlist");
+          res.redirect("localhost:3000");
         }
       )
 });

@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors')
+const bp = require("body-parser")
 // Database
 const mongo = require("mongodb");
 const monk = require("monk");
@@ -7,6 +8,9 @@ const monk = require("monk");
 const app = express();
 const port = 8080
 app.use(cors());
+app.use(bp.json())
+app.use(express.bodyParser());
+app.use(bp.urlencoded({extended:true}))
 
 const db = monk("localhost:27017/pizzas");
 var collection = db.get('users');
@@ -20,7 +24,8 @@ app.use(function(req,res,next){
 });
 
 const pizzasRouter = require('./routes/pizzas');
-const usersRouter = require('./routes/users')
+const usersRouter = require('./routes/users');
+const { urlencoded } = require('express');
 
 app.use('/pizzas', pizzasRouter);
 app.use('/users', usersRouter);

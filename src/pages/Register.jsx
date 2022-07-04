@@ -1,13 +1,13 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container} from 'react-bootstrap';
 import { Link } from "react-router-dom"
 import AdressFrom from '../components/AdressFrom';
+import axios from 'axios';
 
 function Register() {
-    function addUser(e){
-        e.preventDefault()
+    async function addUser(e){
         let fullname = document.querySelector("#formBasicFullName").value
         let email = document.querySelector("#formBasicEmail").value
         let password = document.querySelector("#formBasicPassword").value
@@ -17,22 +17,53 @@ function Register() {
         let complement = document.querySelector("#formGroupComplement").value
         let postCode = document.querySelector("#formGroupPostCode").value
         let city = document.querySelector("#formGroupCity").value
-
-        let user = {
-            fullname,
-            email,
-            password,
-            phone_number : phoneNumber,
-            adress : {
+        e.preventDefault()
+        try {
+            let res = await fetch("http://localhost:8080/users/adduser", {
+              method: "POST",
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "fullname" :fullname,
+                "email" : email,
+                "password":password,
+                "confirmPassword":confirmPassword,
+                "phoneNumber":phoneNumber,
+                "adress":adress,
+                "complement":complement,
+                "postCode":postCode,
+                "city":city
+              })
+            });
+            // let res = await axios.post("ttp://localhost:8080/users/adduser",{
+            //         "fullname" :fullname,
+            //         "email" : email,
+            //         "password":password,
+            //         "confirmPassword":confirmPassword,
+            //         "phoneNumber":phoneNumber,
+            //         "adress":adress,
+            //         "complement":complement,
+            //         "postCode":postCode,
+            //         "city":city
+            //       })
+            // let resJson = await res.json();
+            if (res.status === 200) {
+              console.log("User created successfully",res);
+            } else {
+              console.log("Some error occured", res);
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        console.log({fullname,email,password,phone_number : phoneNumber,adress : {
                 adress,
                 complement,
                 postcode:postCode,
                 city,
             }
-        }
-        
-
-        console.log(user)
+        })
     }
     return (
         <Container className='mt-4'>
