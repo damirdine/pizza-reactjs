@@ -13,8 +13,6 @@ router.get('/', function(req, res, next) {
 router.post('/adduser',function(req,res){
   var db = req.db;
   //post value from the form 
-  console.log(req.body)
-
   let userFullName = req.body.fullname;
   let userEmail = req.body.email;
   let userPassword = req.body.password;
