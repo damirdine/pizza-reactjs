@@ -25,13 +25,6 @@ router.post('/adduser',function(req,res){
   let userPostCode = req.body.postCode;
   let userCity = req.body.city;
 
-  collection.findOne({"email": userEmail},{},function(e,docs){
-    res.json(docs)
-    if(docs!==null){
-      console.log("is exist")
-    }
-  })
-
   if(userPassword!==userConfirmPassword){
     return res.send("Password not Match")
   }
