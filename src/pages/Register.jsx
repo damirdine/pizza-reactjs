@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container} from 'react-bootstrap';
-import { Link } from "react-router-dom"
+import { Link,Redirect } from "react-router-dom"
 import AdressFrom from '../components/AdressFrom';
 
 function Register() {
@@ -37,7 +37,8 @@ function Register() {
               })
             });
             if (res.status === 200) {
-              return console.log("User registed");
+              //console.log("User registed");
+              //<Redirect to="/Home"/>
             } else {
               console.log("Some error occured", res);
             }

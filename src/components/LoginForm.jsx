@@ -2,11 +2,33 @@ import { Container} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Redirect } from 'react-router-dom';
 
 let LoginForm = () => {
-    function loggin (e) {
+    async function loggin (e) {
         e.preventDefault()
-        console.log('hello')
+        let email = document.querySelector("#formBasicEmail").value
+        let password = document.querySelector("#formBasicPassword").value
+        try {
+            let res = await fetch("http://localhost:8080/users/login", {
+              method: "POST",
+            //   headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            //   },
+              body: JSON.stringify({
+                "email" : email,
+                "password":password,
+              })
+            });
+            if (res.status === 200) {
+              //<Redirect to="/Home"/>
+            } else {
+              console.log("Some error occured", res);
+            }
+          } catch (err) {
+            console.log(err);
+          }    
     }
     return (
         <Form onSubmit={loggin} id='LoginForm'>
