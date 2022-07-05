@@ -4,9 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 let LoginForm = () => {
+    function loggin () {
+        console.log('hello')
+    }
     return (
         <>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group onSubmit={loggin} className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" />
             </Form.Group>

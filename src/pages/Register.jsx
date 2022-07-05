@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import {Container} from 'react-bootstrap';
 import { Link } from "react-router-dom"
 import AdressFrom from '../components/AdressFrom';
-import axios from 'axios';
 
 function Register() {
     async function addUser(e){
@@ -37,20 +36,8 @@ function Register() {
                 "city":city
               })
             });
-            // let res = await axios.post("ttp://localhost:8080/users/adduser",{
-            //         "fullname" :fullname,
-            //         "email" : email,
-            //         "password":password,
-            //         "confirmPassword":confirmPassword,
-            //         "phoneNumber":phoneNumber,
-            //         "adress":adress,
-            //         "complement":complement,
-            //         "postCode":postCode,
-            //         "city":city
-            //       })
-            // let resJson = await res.json();
             if (res.status === 200) {
-              console.log("User created successfully",res);
+              console.log(res.status);
             } else {
               console.log("Some error occured", res);
             }
