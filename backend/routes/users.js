@@ -53,26 +53,17 @@ router.post('/adduser',function(req,res){
 
 router.post('/login', function(req,res){
   var db =req.db
-  var userToFind = req.body.email
+  var userEmail = req.body.email
   var userPassword = req.body.password
 
   var collection = db.get('users');
   collection.findOne({email : userEmail}, {},function(err,docs){
     if (docs) {
-      bcrypt.compare(userPassword, docs.password, function(err, docs) {
-        if (docs) {
-            delete docs.password
-            res.json(docs);
-            console.log(docs);
-        }
-        else{ 
-            res.send("WrongPassword")
-      }})
-    }
-    else{
-        res.send("il existe pas !!")
-    }
-})
+      res.json(docs);
+      console.log(docs);
+    }else{ 
+      res.send("WrongPassword")
+    }})
 });
 
 

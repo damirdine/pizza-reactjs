@@ -28,7 +28,8 @@ let LoginForm = () => {
             }
           } catch (err) {
             console.log(err);
-          }    
+          } 
+          console.log("hello")  
     }
     return (
         <Form onSubmit={loggin} id='LoginForm'>
