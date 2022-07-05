@@ -44,7 +44,7 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
                 <>
                     <h3>Total : {totalCart} €</h3>
                     <Row>
-                        <Button variant="primary" onClick={handleShow}>Placing my order</Button>
+                        <Button variant="warning" onClick={handleShow}>Placing my order</Button>
                     </Row>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
@@ -60,7 +60,7 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
                         <Button variant="secondary" onClick={handleClose}>
                             Cancel
                         </Button>
-                        <Button variant="primary" onClick={makeOrder}>
+                        <Button variant="warning" onClick={makeOrder}>
                             Order
                         </Button>
                         </Modal.Footer>

@@ -37,20 +37,20 @@ function Register() {
               })
             });
             if (res.status === 200) {
-              console.log(res.status);
+              return console.log("User registed");
             } else {
               console.log("Some error occured", res);
             }
           } catch (err) {
             console.log(err);
           }
-        console.log({fullname,email,password,phone_number : phoneNumber,adress : {
-                adress,
-                complement,
-                postcode:postCode,
-                city,
-            }
-        })
+        // console.log({fullname,email,password,phone_number : phoneNumber,adress : {
+        //         adress,
+        //         complement,
+        //         postcode:postCode,
+        //         city,
+        //     }
+        // })
     }
     return (
         <Container className='mt-4'>
@@ -79,7 +79,7 @@ function Register() {
                     <summary className='mb-3'>Add my adress (for your next order)</summary>
                     <AdressFrom/>
                 </details>
-                <Button variant="primary" type='submit'>Register</Button> 
+                <Button variant="warning" type='submit'>Register</Button> 
                 <br/><span className='d-block mt-4'>Or</span>
                 <Link to="/Login">Login</Link>
             </Form>

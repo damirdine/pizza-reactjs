@@ -8,11 +8,9 @@ function Login() {
   return (
     <Container className='mt-4'>
         <h3>Login</h3>
-        <Form className='mt-4'>
-            <LoginForm/>
+            <LoginForm className='mt-4'/>
             <br/><span className='d-block mt-4'>Or</span>
             <Link to="/Register">Register</Link>
-        </Form>
     </Container>
   );
 }
