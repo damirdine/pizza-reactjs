@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcrypt');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -52,7 +53,7 @@ router.post('/adduser',function(req,res){
       if(err){
         res.send("Problem for adding user to database.")
       }
-      res.redirect("localhost:3000");
+      res.redirect("/");
     }
   )
 });
@@ -63,9 +64,22 @@ router.post('/login', function(req,res){
   var userPassword = req.body.password
 
   var collection = db.get('users');
-  collection.findOne({"email": userToFind},{},function(e,docs){
-    res.json(docs);
-  })
+  collection.findOne({email : userEmail}, {},function(err,docs){
+    if (docs) {
+      bcrypt.compare(userPassword, docs.password, function(err, docs) {
+        if (docs) {
+            delete docs.password
+            res.json(docs);
+            console.log(docs);
+        }
+        else{ 
+            res.send("WrongPassword")
+      }})
+    }
+    else{
+        res.send("il existe pas !!")
+    }
+})
 });
 
 
