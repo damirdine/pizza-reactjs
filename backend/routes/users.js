@@ -46,7 +46,6 @@ router.post('/adduser',function(req,res){
       if(err){
         res.send("Problem for adding user to database.")
       }
-      res.redirect("/");
     }
   )
 });
