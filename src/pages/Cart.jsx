@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
 import { Container, Row,Button,Modal } from "react-bootstrap";
+import  {Navigate} from "react-router-dom";
 import CartItem from "../components/CartItem";
 import GuestForm from "../components/GuestForm";
 import LoginForm from "../components/LoginForm";
@@ -25,6 +26,7 @@ let Cart = ({pizzaData,cartItems,deleteFromCart}) =>{
     const makeOrder = () => {
         console.log("order make")
         setShow(false);
+        <Navigate to="/Order"/>
     }
     return(
         <Container className="mt-4">
