@@ -6,21 +6,17 @@ const mongo = require("mongodb")
 const monk = require("monk")
 const db = monk("localhost:27017/pizzas")
 // user passport
-const passport = require("passport")
 const session = require("express-session");
+const cookieParser = require("cookie-parser")
 // hasher
 const bcrypt = require("bcrypt");
 
 const app = express()
 const port = 8080
 
-const initializePassport = require('./passport-config')
-initializePassport(
-  passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
 
+app.use(express.json());
+app.use(cookieParser())
 app.use(bp.json())  
 app.use(bp.urlencoded({extended:true})) 
 app.use(cors())
@@ -29,10 +25,11 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      expires: 60 * 60 * 12,
+    },
   })
 )
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(function(req,res,next){
   req.db = db;

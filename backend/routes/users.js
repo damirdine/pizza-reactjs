@@ -64,6 +64,17 @@ router.post('/adduser',function(req,res){
 
 });
 
+router.get('/isLogin',(req,res)=>{
+  if(req.session.loggedUser){
+    res.json({
+      loggedIn : true,
+      user : req.session.loggedUser
+    })
+  }else{
+    res.json({loggedIn: false})
+  }
+})
+
 router.post('/login',(req,res) => {
   var db = req.db;
   var collection = db.get('users');
@@ -77,6 +88,8 @@ router.post('/login',(req,res) => {
     }
     bcrypt.compare(userPassword, docs.password, function (err, result) {
       if(result){
+        req.session.loggedUser = docs
+        console.log(req.session)
         return res.json({message: "Success Login",email:userEmail,userFullName: docs.fullname})
       }
       else{
@@ -88,7 +101,7 @@ router.post('/login',(req,res) => {
 
 
 router.delete('/logout', (req, res) => {
-  req.logOut()
+  req.session.destroy()
   res.redirect('/login')
 })
 
