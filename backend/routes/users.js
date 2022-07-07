@@ -9,6 +9,7 @@ const saltRounds = 10;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  req.session.loggedUser = "hello"
   var db = req.db;
   var collection = db.get('users');
   collection.find({},{},function(e,docs){
@@ -64,7 +65,8 @@ router.post('/adduser',function(req,res){
 
 });
 
-router.get('/isLogin',(req,res)=>{
+router.get('/login',(req,res)=>{
+  
   if(req.session.loggedUser){
     res.json({
       loggedIn : true,
@@ -89,8 +91,9 @@ router.post('/login',(req,res) => {
     bcrypt.compare(userPassword, docs.password, function (err, result) {
       if(result){
         req.session.loggedUser = docs
-        console.log(req.session)
-        return res.json({message: "Success Login",email:userEmail,userFullName: docs.fullname})
+        req.session.save()
+        console.log(req.session.loggedUser)
+        res.json({message: "Success Login",email:userEmail,userFullName: req.session.loggedUser.fullname})
       }
       else{
         return res.json({message:"Password incorrect"})
@@ -99,10 +102,10 @@ router.post('/login',(req,res) => {
   })
 })
 
-
-router.delete('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
+  console.log(req.session.loggedUser)
   req.session.destroy()
-  res.redirect('/login')
+  res.send('user logout')
 })
 
 
