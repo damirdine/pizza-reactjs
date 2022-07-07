@@ -3,6 +3,8 @@ var router = express.Router();
 var bcrypt = require('bcrypt');
 const { route } = require('./pizzas');
 
+const saltRounds = 10;
+
 
 
 /* GET users listing. */
@@ -34,27 +36,30 @@ router.post('/adduser',function(req,res){
       return res.json({message : `User exist with this email : ${userEmail}`})
     }
     if(!docs && userPassword !== "" && userPassword===userConfirmPassword && userEmail!==""){
-      collection.insert(
-        {
-          "fullname":userFullName,
-          "email": userEmail,
-          "password":userPassword,
-          "phone_number":userPhoneNumber,
-          "adress":{
-            "adress":userAdress,
-            "complement": userComplement,
-            "postcode": userPostCode,
-            "city": userCity
+      bcrypt.hash(userPassword,saltRounds,(err,hashPassword)=>{ 
+        collection.insert(
+          {
+            "fullname":userFullName,
+            "email": userEmail,
+            "password":hashPassword,
+            "phone_number":userPhoneNumber,
+            "adress":{
+              "adress":userAdress,
+              "complement": userComplement,
+              "postcode": userPostCode,
+              "city": userCity
+            }
+          }, 
+          function(err,docs){
+            if(err){
+              return res.json("Problem for adding user to database.")
+            }
+            return res.json({message : "User Add Correctly"})
           }
-        }, 
-        function(err,docs){}
-      )
-      if(err){
-        return res.json("Problem for adding user to database.")
-      }
-      return res.json({message : "User Add Correctly"})
+      )})
+    }else{
+      return res.json({message: "email not correct or password not match"})
     }
-    return res.json({message: "email not correct or password not match"})
   })
 
 });
@@ -62,7 +67,7 @@ router.post('/adduser',function(req,res){
 router.post('/login',(req,res) => {
   var db = req.db;
   var collection = db.get('users');
-  
+
   let userEmail = req.body.email
   let userPassword = req.body.password
 
