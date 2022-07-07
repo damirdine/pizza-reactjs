@@ -37,8 +37,8 @@ function Register() {
               })
             });
             if (res.status === 200) {
-              //console.log("User registed");
-              //<Navigate to="/Order"/>
+              let data = await res.json()
+              console.log("Some error occured", data);
             } else {
               console.log("Some error occured", res);
             }

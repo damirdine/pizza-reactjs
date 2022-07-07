@@ -10,26 +10,26 @@ let LoginForm = () => {
         let email = document.querySelector("#formBasicEmail").value
         let password = document.querySelector("#formBasicPassword").value
         try {
-            let res = await fetch("http://localhost:8080/users/login", {
-              method: "POST",
-            //   headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            //   },
-              body: JSON.stringify({
-                "email" : email,
-                "password":password,
-              })
-            });
-            if (res.status === 200) {
-              //<Redirect to="/Home"/>
-            } else {
-              console.log("Some error occured", res);
-            }
-          } catch (err) {
-            console.log(err);
-          } 
-          console.log("hello")  
+          let res = await fetch("http://localhost:8080/users/login", {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              "email" : email,
+              "password":password,
+            })
+          });
+          if (res.status === 200) {
+            let data = await res.json()
+            console.log("Some error occured", data);
+          } else {
+            console.log("Some error occured", res);
+          }
+        } catch (err) {
+          console.log(err);
+        }
     }
     return (
         <Form onSubmit={loggin} id='LoginForm'>
