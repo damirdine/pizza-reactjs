@@ -75,9 +75,14 @@ router.post('/login',(req,res) => {
     if(!docs){
       return res.json({message: "no user exist with this email",email:userEmail})
     }
-    if(docs.password==userPassword){
-      return res.json({message: "Success Login",email:userEmail,userFullName: docs.fullname})
-    }
+    bcrypt.compare(userPassword, docs.password, function (err, result) {
+      if(result){
+        return res.json({message: "Success Login",email:userEmail,userFullName: docs.fullname})
+      }
+      else{
+        return res.json({message:"Password incorrect"})
+      }
+    })
   })
 })
 
