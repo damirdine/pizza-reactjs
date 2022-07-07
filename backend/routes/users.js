@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
+const { route } = require('./pizzas');
 
 
 
@@ -27,53 +28,54 @@ router.post('/adduser',function(req,res){
   let userPostCode = req.body.postCode;
   let userCity = req.body.city;
   //Set the collection
+  
   collection.findOne({email : userEmail}, {},function(err,docs){
-    console.log(docs)
     if (docs) {
       return res.json({message : `User exist with this email : ${userEmail}`})
     }
-    return res.json({"message" : "User can register"})
-})
-  // collection.insert(
-  //   {
-  //     "fullname":userFullName,
-  //     "email": userEmail,
-  //     "password":userPassword,
-  //     "phone_number":userPhoneNumber,
-  //     "adress":{
-  //       "adress":userAdress,
-  //       "complement": userComplement,
-  //       "postcode": userPostCode,
-  //       "city": userCity
-  //     }
-  //   }, 
-  //   function(err,docs){
-  //     if(err){
-  //       res.send("Problem for adding user to database.")
-  //     }
-  //     if(userPassword!==userConfirmPassword){
-  //       return res.json("Password not Match")
-  //     }
-  //   }
-  // )
+    if(!docs && userPassword !== "" && userPassword===userConfirmPassword && userEmail!==""){
+      collection.insert(
+        {
+          "fullname":userFullName,
+          "email": userEmail,
+          "password":userPassword,
+          "phone_number":userPhoneNumber,
+          "adress":{
+            "adress":userAdress,
+            "complement": userComplement,
+            "postcode": userPostCode,
+            "city": userCity
+          }
+        }, 
+        function(err,docs){}
+      )
+      if(err){
+        return res.json("Problem for adding user to database.")
+      }
+      return res.json({message : "User Add Correctly"})
+    }
+    return res.json({message: "email not correct or password not match"})
+  })
+
 });
 
-router.post('/login', function(req,res){
+router.post('/login',(req,res) => {
   var db = req.db;
   var collection = db.get('users');
-  console.log(req.body)
-  collection.findOne({email : req.body.email}, {},function(err,docs){
-    console.log(docs)
-    if (!docs) {
-      return res.json({message : "il existe pas !!"})
+  
+  let userEmail = req.body.email
+  let userPassword = req.body.password
+
+  collection.findOne({email : userEmail}, {},function(err,docs){
+    if(!docs){
+      return res.json({message: "no user exist with this email",email:userEmail})
     }
-    if(docs.password===req.body.email){
-      return res.json({"message" : "User logged"})
-    }else{
-      return res.json({"message" : "Password Error"})
+    if(docs.password==userPassword){
+      return res.json({message: "Success Login",email:userEmail,userFullName: docs.fullname})
     }
+  })
 })
-});
+
 
 router.delete('/logout', (req, res) => {
   req.logOut()

@@ -38,7 +38,7 @@ function Register() {
             });
             if (res.status === 200) {
               let data = await res.json()
-              console.log("Some error occured", data);
+              console.log(data);
             } else {
               console.log("Some error occured", res);
             }
