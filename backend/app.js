@@ -26,8 +26,8 @@ app.use(bp.json())
 
 app.use(session({
     secret: "secretcode",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     maxAge : 60*60*12
   })
 )
@@ -38,6 +38,7 @@ app.use(function(req,res,next){
 
 const pizzasRouter = require('./routes/pizzas');
 const usersRouter = require('./routes/users');
+const { flushSync } = require('react-dom')
 
 app.use('/pizzas', pizzasRouter);
 app.use('/users', usersRouter);

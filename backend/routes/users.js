@@ -66,7 +66,7 @@ router.post('/adduser',function(req,res){
 });
 
 router.get('/login',(req,res)=>{
-  
+  console.log(req.session)
   if(req.session.loggedUser){
     res.json({
       loggedIn : true,
@@ -89,15 +89,13 @@ router.post('/login',(req,res) => {
       return res.json({message: "no user exist with this email",email:userEmail})
     }
     bcrypt.compare(userPassword, docs.password, function (err, result) {
-      if(result){
-        req.session.loggedUser = docs
-        req.session.save()
-        console.log(req.session.loggedUser)
-        res.json({message: "Success Login",email:userEmail,userFullName: req.session.loggedUser.fullname})
-      }
-      else{
+      if(!result){
         return res.json({message:"Password incorrect"})
       }
+      req.session.loggedUser = docs
+      req.session.save()
+      console.log(req.session)
+      res.json({message: "Success Login",email:userEmail,userFullName: req.session.loggedUser.fullname})
     })
   })
 })
