@@ -13,7 +13,9 @@ import Register from "./pages/Register";
 import { React,useState, useEffect} from 'react';
 
 function App() {
-  const [UserLogged,setUserLogged] = useState([])
+  const [UserLogged,setUserLogged] = useState(()=>{
+    
+  })
   const [cartItems,setCartItems] = useState([])
   const [pizzaData, setPizzasData] = useState(()=> {
     fetch("http://localhost:8080/pizzas")
