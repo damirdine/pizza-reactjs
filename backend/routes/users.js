@@ -92,7 +92,7 @@ router.post('/login',(req,res) => {
       if(!result){
         return res.json({message:"Password incorrect"})
       }
-      req.session.loggedUser = docs
+      req.session.loggedUser = {email: docs.email,fullname:docs.fullname}
       req.session.save()
       console.log(req.session)
       res.json({message: "Success Login",email:userEmail,userFullName: req.session.loggedUser.fullname})

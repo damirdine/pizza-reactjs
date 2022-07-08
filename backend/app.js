@@ -7,7 +7,6 @@ const monk = require("monk")
 const db = monk("localhost:27017/pizzas")
 // user passport
 const session = require("express-session");
-const cookieParser = require("cookie-parser")
 // hasher
 const bcrypt = require("bcrypt");
 
@@ -20,15 +19,17 @@ app.use(cors({
   origin: ["http://localhost:3000"],
   credentials: true,
 }))
-app.use(cookieParser())
+
 app.use(bp.urlencoded({extended:true})) 
 app.use(bp.json())  
 
 app.use(session({
     secret: "secretcode",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    maxAge : 60*60*12
+    cookie:{
+      maxAge : 60*60*12
+    }
   })
 )
 app.use(function(req,res,next){
