@@ -92,7 +92,7 @@ router.post('/login',(req,res) => {
       if(!result){
         return res.json({message:"Password incorrect"})
       }
-      req.session.loggedUser = {email: docs.email,fullname:docs.fullname}
+      req.session.loggedUser = {email: docs.email,fullname:docs.fullname,adress:docs.adress}
       req.session.save()
       console.log(req.session)
       res.json({message: "Success Login",email:userEmail,userFullName: req.session.loggedUser.fullname})
@@ -100,7 +100,7 @@ router.post('/login',(req,res) => {
   })
 })
 
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   console.log(req.session.loggedUser)
   req.session.destroy()
   res.send('user logout')

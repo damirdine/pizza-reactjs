@@ -19,7 +19,8 @@ let LoginForm = () => {
             body: JSON.stringify({
               "email" : email,
               "password":password,
-            })
+            }),
+            credentials: "include"
           });
           if (res.status === 200) {
             let data = await res.json()
@@ -31,6 +32,7 @@ let LoginForm = () => {
           console.log(err);
         }
     }
+  
     return (
         <Form onSubmit={loggin} id='LoginForm'>
             <Form.Group  className="mb-3" controlId="formBasicEmail">

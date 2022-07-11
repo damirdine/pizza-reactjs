@@ -44,4 +44,8 @@ const { flushSync } = require('react-dom')
 app.use('/pizzas', pizzasRouter);
 app.use('/users', usersRouter);
 
+app.get("/",(req,res)=>{
+  res.send(req.session)
+})
+
 app.listen(process.env.PORT || port);
