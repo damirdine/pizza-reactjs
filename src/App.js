@@ -44,7 +44,7 @@ function App() {
         credentials: "include"
       })
       .then(response => response.json())
-      .then(data => setUserLogged(data));
+      .then(data => console.log(data));
   })
 
   return (
