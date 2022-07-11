@@ -4,12 +4,9 @@ import {Navbar, Nav, Container, Image,Dropdown} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
 const NavBar = ({cartItems,UserLogged}) => {
-    const [user,setUser] = useState(UserLogged)
-    // useEffect(()=>{
-    //     if(UserLogged.loggedIn){
-    //         setUser(UserLogged)
-    //     }
-    // })
+    const [user,setUser] = useState()
+    
+    console.log(UserLogged)
     return(
         <Navbar>
             <Container>
@@ -19,17 +16,15 @@ const NavBar = ({cartItems,UserLogged}) => {
                     }}/>
                 </Navbar.Brand>
                 <Nav> 
-                   {!user.loggedIn && (
                         <>
                             <LinkContainer to="/Login" activeClassName>
-                            <Nav.Link>Login</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/Register" activeClassName>
-                            <Nav.Link>Register</Nav.Link>
-                        </LinkContainer>
+                                <Nav.Link>Login</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/Register" activeClassName>
+                                <Nav.Link>Register</Nav.Link>
+                            </LinkContainer>
                         </>
-                    )
-                   }
+                   {/* {user.loggedIn && <p>user.user.fullname</p>} */}
 
                     <LinkContainer to="/Cart" activeClassName>
                         <Nav.Link>Cart <Badge bg="warning" text="dark">{cartItems.length}</Badge></Nav.Link>

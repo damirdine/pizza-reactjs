@@ -38,14 +38,24 @@ function App() {
   const deleteFromCart = (product)=>{
     setCartItems((products) => products.filter((_, index) => index !== 0));
   }
-  useEffect(()=>{
-    fetch("http://localhost:8080/users/login", {
-        method: "GET",
-        credentials: "include"
-      })
-      .then(response => response.json())
-      .then(data => console.log(data));
+
+  useEffect(async()=>{
+    try {
+        let res = await fetch("http://localhost:8080/users/login", {
+          method: "GET",
+        });
+        if (res.status === 200) {
+          let data = await res.json()
+          console.log(data)
+          setUserLogged(data);
+        } else {
+          console.log("Some error occured", res);
+        }
+    } catch (err) {
+    console.log(err);
+    }
   })
+  console.log(UserLogged)
 
   return (
     <BrowserRouter>
