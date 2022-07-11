@@ -3,10 +3,29 @@ import Badge from 'react-bootstrap/Badge';
 import {Navbar, Nav, Container, Image,Dropdown} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
-const NavBar = ({cartItems,UserLogged}) => {
+const NavBar = ({cartItems,}) => {
     const [user,setUser] = useState()
-    
-    console.log(UserLogged)
+    useEffect(async()=>{
+        try {
+            let res = await fetch("http://localhost:8080/users/login", {
+              method: "GET",
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            });
+            if (res.status === 200) {
+              let data = await res.json()
+              if(data.loggedIn){
+                setUser(data.user)
+              };
+            } else {
+              console.log("Some error occured", res);
+            }
+        } catch (err) {
+        console.log(err);
+        }
+    })
     return(
         <Navbar>
             <Container>

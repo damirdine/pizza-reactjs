@@ -39,6 +39,7 @@ app.use(function(req,res,next){
 
 const pizzasRouter = require('./routes/pizzas');
 const usersRouter = require('./routes/users');
+const purchase = require('./routes/purchase');
 const { flushSync } = require('react-dom')
 
 app.use('/pizzas', pizzasRouter);
