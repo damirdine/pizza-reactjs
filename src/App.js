@@ -13,9 +13,7 @@ import Register from "./pages/Register";
 import { React,useState, useEffect} from 'react';
 
 function App() {
-  const [UserLogged,setUserLogged] = useState(()=>{
-    
-  })
+  const [UserLogged,setUserLogged] = useState()
   const [cartItems,setCartItems] = useState([])
   const [pizzaData, setPizzasData] = useState(()=> {
     fetch("http://localhost:8080/pizzas")
@@ -27,7 +25,6 @@ function App() {
       .then(data => {setPizzasData(data)})
       .catch(err => {console.log(err,"WE CATCH AN ERROR")})
   });
-
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
     if(isExist){
@@ -37,15 +34,23 @@ function App() {
       setCartItems([...cartItems,product])
     }
   }
-
+  
   const deleteFromCart = (product)=>{
     setCartItems((products) => products.filter((_, index) => index !== 0));
   }
+  useEffect(()=>{
+    fetch("http://localhost:8080/users/login", {
+        method: "GET",
+        credentials: "include"
+      })
+      .then(response => response.json())
+      .then(data => setUserLogged(data));
+  })
 
   return (
     <BrowserRouter>
       <TopBar/>
-      <NavBar cartItems={cartItems}/>
+      <NavBar cartItems={cartItems} UserLogged={UserLogged}/>
       <Routes>
       <Route path="/" element={<Home cartItems={cartItems} addToCart={addToCart} pizzaData={pizzaData}/>}/>
         <Route path="/About" element={<About/>}/>

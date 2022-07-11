@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Redirect } from 'react-router-dom';
 
-let LoginForm = () => {
+let LoginForm = ({setUserLogged}) => {
     async function loggin (e) {
         e.preventDefault()
         let email = document.querySelector("#formBasicEmail").value

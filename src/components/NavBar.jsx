@@ -3,7 +3,13 @@ import Badge from 'react-bootstrap/Badge';
 import {Navbar, Nav, Container, Image} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
-const NavBar = ({cartItems}) => {
+const NavBar = ({cartItems,UserLogged}) => {
+    const [user,setUser] = useState(UserLogged)
+    useEffect(()=>{
+        if(UserLogged.loggedIn){
+            setUser(UserLogged)
+        }
+    })
     return(
         <Navbar>
             <Container>
@@ -12,16 +18,29 @@ const NavBar = ({cartItems}) => {
                         width:'125px',
                     }}/>
                 </Navbar.Brand>
-                <Nav>
-                    <LinkContainer to="/Login" activeClassName>
-                        <Nav.Link>Login</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/Register" activeClassName>
-                        <Nav.Link>Register</Nav.Link>
-                    </LinkContainer>
+                <Nav> 
+                   {user.loggedIn && (
+                        <LinkContainer to="#" activeClassName>
+                                <Nav.Link>{user.user.fullname}</Nav.Link>
+                        </LinkContainer>
+                   )}
+
+                   {!user.loggedIn && (
+                        <>
+                            <LinkContainer to="/Login" activeClassName>
+                            <Nav.Link>Login</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/Register" activeClassName>
+                            <Nav.Link>Register</Nav.Link>
+                        </LinkContainer>
+                        </>
+                    )
+                   }
+
                     <LinkContainer to="/Cart" activeClassName>
                         <Nav.Link>Cart <Badge bg="warning" text="dark">{cartItems.length}</Badge></Nav.Link>
                     </LinkContainer>
+                    
                 </Nav>
             </Container>
         </Navbar>
