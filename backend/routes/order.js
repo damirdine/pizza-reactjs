@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 
+const YOUR_DOMAIN = "http://localhost:8080"
+
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY
 const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
 
@@ -14,21 +16,27 @@ router.post('/', function (req, res) {
     res.send(cart)
 });
 
-router.post('/checkout', function (req, res) {
+router.post('/checkout', async function (req, res) {
     const db = req.db
     const {cart, total} = req.body
     console.log(cart,total)
-    stripe.charges.create({
-        amount: total,
-        source: "price_1LKimABoXSShTQR5w5rnIa1t",
-        currency: 'eur'
-      }).then(function() {
-        console.log('Charge Successful')
-        res.json({ message: 'Successfully purchased items' })
-      }).catch(function() {
-        console.log('Charge Fail')
-        res.status(500).json({ message: 'Fail purchase items' }).end()
-      })
+    const { product } = req.body;
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: cart,
+        mode: "payment",
+        success_url: `${YOUR_DOMAIN}/checkout/success`,
+        cancel_url: `${YOUR_DOMAIN}/checkout/cancel`,
+    });
+
+    res.json({ id: session.id });
 });
+
+router.get('/checkout/success',(req,res) => {
+    res.send("checkout is success")
+})
+router.get('/checkout/cancel',(req,res) => {
+    res.send("checkout is cancel")
+})
 
 module.exports = router;
