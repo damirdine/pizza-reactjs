@@ -9,6 +9,9 @@ const db = monk("localhost:27017/pizzas")
 const session = require("express-session");
 // hasher
 const bcrypt = require("bcrypt");
+// Env variables
+const dotenv = require('dotenv')
+dotenv.config()
 
 const app = express()
 const port = 8080
@@ -43,7 +46,7 @@ const OrderRouter = require('./routes/order');
 
 app.use('/pizzas', pizzasRouter);
 app.use('/users', usersRouter);
-app.use('/purchase', OrderRouter);
+app.use('/order', OrderRouter);
 
 app.get("/",(req,res)=>{
   res.send(req.session)
