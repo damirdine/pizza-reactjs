@@ -39,12 +39,11 @@ app.use(function(req,res,next){
 
 const pizzasRouter = require('./routes/pizzas');
 const usersRouter = require('./routes/users');
-const purchaseRouter = require('./routes/purchase');
-const { flushSync } = require('react-dom')
+const OrderRouter = require('./routes/order');
 
 app.use('/pizzas', pizzasRouter);
 app.use('/users', usersRouter);
-app.use('/purchase', purchaseRouter);
+app.use('/purchase', OrderRouter);
 
 app.get("/",(req,res)=>{
   res.send(req.session)
