@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 
-const YOUR_DOMAIN = "http://localhost:8080"
-
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY
 const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
 
@@ -18,18 +16,32 @@ router.post('/', function (req, res) {
 
 router.post('/checkout', async function (req, res) {
     const db = req.db
-    const {cart, total} = req.body
-    console.log(cart,total)
-    const { product } = req.body;
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: cart,
-        mode: "payment",
-        success_url: `${YOUR_DOMAIN}/checkout/success`,
-        cancel_url: `${YOUR_DOMAIN}/checkout/cancel`,
-    });
-
-    res.json({ id: session.id });
+    const {cart} = req.body
+    console.log(cart)
+    try {
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ["card"],
+          mode: "payment",
+          line_items: cart.map(item => {
+            return {
+              price_data: {
+                currency: "eur",
+                product_data: {
+                  name: item.name,
+                },
+                unit_amount: item.priceInCents,
+              },
+              quantity: item.quantity,
+            }
+          }),
+          // LIINK HAVE TO CHANGE FOR FRONT END APP
+          success_url: `${process.env.DOMAIN}/success`,
+          cancel_url: `${process.env.DOMAIN}/cancel`,
+        })
+        res.json({ url: session.url })
+      } catch (e) {
+        res.status(500).json({ error: e.message })
+      }
 });
 
 router.get('/checkout/success',(req,res) => {
