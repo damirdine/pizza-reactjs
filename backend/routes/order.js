@@ -7,17 +7,9 @@ const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
 
 const stripe = require('stripe')(stripeSecretKey)
 
-router.post('/', function (req, res) {
-    const db = req.db
-    const {cart, total} = req.body
-    console.log(cart,total)
-    res.send(cart)
-});
-
 router.post('/checkout', async function (req, res) {
     const db = req.db
     const {cart} = req.body
-    console.log(cart)
     try {
         const session = await stripe.checkout.sessions.create({
           payment_method_types: ["card"],
