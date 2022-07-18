@@ -24,9 +24,7 @@ function App() {
         });
         if (res.status === 200) {
           let data = await res.json()
-          if(data?.loggedIn){
-            setUserLogged(data.user)
-          };
+          setUserLogged(data)
         } else {
           console.log("Some error occured", res);
         }
@@ -61,7 +59,7 @@ function App() {
   const deleteFromCart = (product)=>{
     setCartItems((products) => products.filter((_, index) => index !== 0));
   }
-
+  console.log(UserLogged)
   return (
     <BrowserRouter>
       <TopBar/>

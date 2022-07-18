@@ -4,7 +4,6 @@ import {Navbar, Nav, Container, Image,Dropdown} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
 const NavBar = ({cartItems,UserLogged}) => {
-    console.log(UserLogged)
     return(
         <Navbar>
             <Container>
@@ -14,9 +13,11 @@ const NavBar = ({cartItems,UserLogged}) => {
                     }}/>
                 </Navbar.Brand>
                 <Nav>
-                   {UserLogged.loggedIn
-                    ? (<p>{UserLogged.user?.fullname}</p>) 
-                    : (
+                   {UserLogged?.loggedIn
+                    ?   (
+                            <p>{UserLogged.user.fullname}</p>
+                        ) 
+                    :   (
                         <>
                             <LinkContainer to="/Login" activeClassName>
                                 <Nav.Link>Login</Nav.Link>
