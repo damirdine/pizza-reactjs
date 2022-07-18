@@ -39,22 +39,6 @@ function App() {
     setCartItems((products) => products.filter((_, index) => index !== 0));
   }
 
-  useEffect(async()=>{
-    try {
-        let res = await fetch("http://localhost:8080/users/login", {
-          method: "GET",
-        });
-        if (res.status === 200) {
-          let data = await res.json()
-            return setUserLogged(data);
-        } else {
-          console.log("Some error occured", res);
-        }
-    } catch (err) {
-    console.log(err);
-    }
-  })
-
   return (
     <BrowserRouter>
       <TopBar/>
