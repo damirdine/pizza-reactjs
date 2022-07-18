@@ -27,8 +27,8 @@ router.post('/checkout', async function (req, res) {
             }
           }),
           // LIINK HAVE TO CHANGE FOR FRONT END APP
-          success_url: `${process.env.DOMAIN}/success`,
-          cancel_url: `${process.env.DOMAIN}/cancel`,
+          success_url: `${process.env.DOMAIN}/order/success`,
+          cancel_url: `${process.env.DOMAIN}/order/cancel`,
         })
         res.json({ url: session.url })
       } catch (e) {
@@ -36,11 +36,11 @@ router.post('/checkout', async function (req, res) {
       }
 });
 
-router.get('/checkout/success',(req,res) => {
-    res.send("checkout is success")
+router.get('/success',(req,res) => {
+    res.send("order is success")
 })
-router.get('/checkout/cancel',(req,res) => {
-    res.send("checkout is cancel")
+router.get('cancel',(req,res) => {
+    res.send("order is cancel")
 })
 
 module.exports = router;
