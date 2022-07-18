@@ -13,7 +13,27 @@ import Register from "./pages/Register";
 import { React,useState, useEffect} from 'react';
 
 function App() {
-  const [UserLogged,setUserLogged] = useState()
+  const [UserLogged,setUserLogged] = useState(async()=>{
+    try {
+        let res = await fetch("http://localhost:8080/users/login", {
+          method: "GET",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        });
+        if (res.status === 200) {
+          let data = await res.json()
+          if(data?.loggedIn){
+            setUserLogged(data.user)
+          };
+        } else {
+          console.log("Some error occured", res);
+        }
+    } catch (err) {
+    console.log(err);
+    }
+})
   const [cartItems,setCartItems] = useState([])
   const [pizzaData, setPizzasData] = useState();
 
@@ -26,28 +46,7 @@ function App() {
     })
     .then(data => {setPizzasData(data)})
     .catch(err => {console.log(err,"WE CATCH AN ERROR")})
-  })
-  useEffect(async()=>{
-    try {
-        let res = await fetch("http://localhost:8080/users/login", {
-          method: "GET",
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        });
-        if (res.status === 200) {
-          let data = await res.json()
-          if(data.loggedIn){
-            setUserLogged(data.user)
-          };
-        } else {
-          console.log("Some error occured", res);
-        }
-    } catch (err) {
-    console.log(err);
-    }
-})
+  },[])
 
   const addToCart = (product) => {
     let isExist = cartItems.find((item)=> item.name === product.name && item.size === product.size)
@@ -66,7 +65,7 @@ function App() {
   return (
     <BrowserRouter>
       <TopBar/>
-      <NavBar cartItems={cartItems} UserLogged={UserLogged.user}/>
+      <NavBar cartItems={cartItems} UserLogged={UserLogged}/>
       <Routes>
         <Route path="/" element={<Home cartItems={cartItems} addToCart={addToCart} pizzaData={pizzaData}/>}/>
         <Route path="/About" element={<About/>}/>

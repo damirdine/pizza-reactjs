@@ -4,6 +4,7 @@ import {Navbar, Nav, Container, Image,Dropdown} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
 const NavBar = ({cartItems,UserLogged}) => {
+    console.log(UserLogged)
     return(
         <Navbar>
             <Container>
@@ -12,15 +13,7 @@ const NavBar = ({cartItems,UserLogged}) => {
                         width:'125px',
                     }}/>
                 </Navbar.Brand>
-                <Nav> 
-                        <>
-                            <LinkContainer to="/Login" activeClassName>
-                                <Nav.Link>Login</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/Register" activeClassName>
-                                <Nav.Link>Register</Nav.Link>
-                            </LinkContainer>
-                        </>
+                <Nav>
                    {UserLogged.loggedIn
                     ? (<p>{UserLogged.user?.fullname}</p>) 
                     : (
