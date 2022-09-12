@@ -4,7 +4,7 @@ const bp = require("body-parser")
 // Database
 const mongo = require("mongodb")
 const monk = require("monk")
-const db = monk("localhost:27017/pizzas")
+const db = monk("localhost:27017/pizzaria")
 // user passport
 const session = require("express-session");
 // hasher
@@ -52,4 +52,6 @@ app.get("/",(req,res)=>{
   res.send(req.session)
 })
 
-app.listen(process.env.PORT || port);
+app.listen(process.env.PORT || port),()=>{
+  console.log(`http://localhost:${port}`)
+};
