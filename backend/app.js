@@ -1,57 +1,61 @@
-const express = require('express')
-const cors = require('cors')
-const bp = require("body-parser")
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const bp = require("body-parser");
 // Database
-const mongo = require("mongodb")
-const monk = require("monk")
-const db = monk("localhost:27017/pizzaria")
+const mongo = require("mongodb");
+const monk = require("monk");
+const db = monk(process.env.DB_URL);
 // user passport
 const session = require("express-session");
 // hasher
 const bcrypt = require("bcrypt");
 // Env variables
-const dotenv = require('dotenv')
-dotenv.config()
 
-const app = express()
-const port = 8080
-
+const app = express();
+const port = 8080;
 
 app.use(express.json());
-app.use(cors({
-  origin: ["http://localhost:3000"],
-  credentials: true,
-}))
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+  })
+);
 
-app.use(bp.urlencoded({extended:true})) 
-app.use(bp.json())  
+app.use(bp.urlencoded({ extended: true }));
+app.use(bp.json());
 
-app.use(session({
+app.use(
+  session({
     secret: "secretcode",
     resave: true,
     saveUninitialized: false,
-    cookie:{
-      maxAge : 60*60*60*12
-    }
+    cookie: {
+      maxAge: 60 * 60 * 60 * 12,
+    },
   })
-)
-app.use(function(req,res,next){
+);
+app.use(function (req, res, next) {
   req.db = db;
   next();
 });
 
-const pizzasRouter = require('./routes/pizzas');
-const usersRouter = require('./routes/users');
-const OrderRouter = require('./routes/order');
+const pizzasRouter = require("./routes/pizzas");
+const usersRouter = require("./routes/users");
+const OrderRouter = require("./routes/order");
 
-app.use('/pizzas', pizzasRouter);
-app.use('/users', usersRouter);
-app.use('/order', OrderRouter);
+app.use("/pizzas", pizzasRouter);
+app.use("/users", usersRouter);
+app.use("/order", OrderRouter);
 
-app.get("/",(req,res)=>{
-  res.send(req.session)
-})
+app.get("/", (req, res) => {
+  res.send(req.session);
+});
 
-app.listen(process.env.PORT || port),()=>{
-  console.log(`http://localhost:${port}`)
-};
+console.log("HOOOOOOo", port);
+
+app.listen(process.env.PORT || port),
+  () => {
+    console.log(`http://localhost:${port}`);
+  };
