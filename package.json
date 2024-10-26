@@ -4,12 +4,12 @@
   "description": "Ce projet est une application Ecommerce pour une entreprise de pizzas, développée en utilisant la pile MERN (MongoDB, Express, React, Node.js). L'application permet aux utilisateurs de parcourir une variété de pizzas, de les ajouter à un panier d'achat, puis de procéder à l'achat. Les fonctionnalités clés comprennent :",
   "main": "index.js",
   "scripts": {
-    "setup":"",
+    "dev:api": "npm run start:dev --workspace=api",
+    "dev:front":"npm run dev --workspace=react-web-app",
 
-    "api:dev": "npm run start:dev --workspace=api",
-    "api:start": "echo \"Error: no test specified\" && exit 1",
+    "build:api": "npm run build --workspace=api",
+    "build:front": "npm run build --workspace=react-web-app"
     
-    "front:dev":""
   },
   "private": true,
   "workspaces": [
