@@ -46,7 +46,7 @@ const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
                   Size : <br />
                   <select name="size" value={size} onChange={getSize}>
                     {lapizza.varients.map((size) => (
-                      <option value={size}>{size}</option>
+                      <option value={size} key={size}>{size}</option>
                     ))}
                   </select>
                 </h6>
@@ -60,7 +60,7 @@ const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
                     onChange={getQuantity}
                   >
                     {[...Array(10).keys()].map((_v, i) => (
-                      <option value={i + 1}>{i + 1}</option>
+                      <option key={i}value={i + 1}>{i + 1} </option>
                     ))}
                   </select>
                 </h6>

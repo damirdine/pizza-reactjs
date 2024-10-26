@@ -29,26 +29,21 @@ function App() {
     }
   };
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={"/pizza-reactjs"}>
       <TopBar />
       <NavBar cartItems={cartItems} UserLogged={null} />
       <Routes>
         <Route
           path="/"
-          element={
-            <Home
-              addToCart={addToCart}
-              pizzaData={pizzaData}
-            />
-          }
+          element={<Home addToCart={addToCart} pizzaData={pizzaData} />}
         />
-        <Route path="/About" element={<About />} />
-        <Route path="/Contact" element={<Contact />} />
-        <Route path="/Policy" element={<Policy />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
-          path="/Cart"
+          path="/cart"
           element={
             <Cart
               cartItems={cartItems}

@@ -23,16 +23,16 @@ const NavBar = ({ cartItems, UserLogged }: NavBarProps) => {
             <p>{UserLogged.user.fullname}</p>
           ) : (
             <>
-              <LinkContainer to="/Login">
+              <LinkContainer to="/login">
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/Register">
+              <LinkContainer to="/register">
                 <Nav.Link>Register</Nav.Link>
               </LinkContainer>
             </>
           )}
 
-          <LinkContainer to="/Cart">
+          <LinkContainer to="/cart">
             <Nav.Link>
               Cart{" "}
               <Badge bg="warning" text="dark">

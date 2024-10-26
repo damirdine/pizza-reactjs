@@ -5,7 +5,8 @@
 /.pnp
 .pnp.js
 
-/api-dist
+/frontend
+/backend
 
 mongo-data
 
