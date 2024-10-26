@@ -13,7 +13,11 @@ const Home = ({ addToCart, pizzaData }: HomeProps) => {
       <Row gap={3} key="home-row">
         {pizzaData?.map((pizza) => (
           <Col md={4}>
-            <Pizza lapizza={pizza} addToCart={addToCart} key={pizza.name} />
+            <Pizza
+              lapizza={{ ...pizza, image: `.${pizza.image}` }}
+              addToCart={addToCart}
+              key={pizza.name}
+            />
           </Col>
         ))}
       </Row>
