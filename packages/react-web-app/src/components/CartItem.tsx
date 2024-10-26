@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import { CartItemType} from "../types";
+import { CartItemType } from "../types";
 
 type CartItemProps = {
   item: CartItemType;

@@ -1,8 +1,7 @@
-import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AdressFrom from "../components/AdressFrom";
 
 function Register() {
@@ -39,7 +38,7 @@ function Register() {
         }),
       });
       if (res.status === 200) {
-        const {data} = await res.json();
+        const { data } = await res.json();
         console.log(data);
       } else {
         console.log("Some error occured", res);

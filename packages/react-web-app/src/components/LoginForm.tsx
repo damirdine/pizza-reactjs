@@ -1,8 +1,5 @@
-import { Container} from 'react-bootstrap';
-import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Redirect } from 'react-router-dom';
 
 let LoginForm = ({setUserLogged}) => {
     async function loggin (e) {
@@ -10,7 +7,7 @@ let LoginForm = ({setUserLogged}) => {
         let email = document.querySelector("#formBasicEmail").value
         let password = document.querySelector("#formBasicPassword").value
         try {
-          let res = await fetch("http://localhost:8080/users/login", {
+          const res = await fetch("http://localhost:8080/users/login", {
             method: "POST",
             headers: {
               'Accept': 'application/json',
@@ -23,7 +20,7 @@ let LoginForm = ({setUserLogged}) => {
             credentials: "include"
           });
           if (res.status === 200) {
-            let data = await res.json()
+            const data = await res.json()
             console.log(data);
           } else {
             console.log("Some error occured", res);

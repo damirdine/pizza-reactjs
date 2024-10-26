@@ -1,9 +1,7 @@
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from "react-router-dom"
 import AdressFrom from './AdressFrom';
 
-let PayForm = ()=> {
+const PayForm = ()=> {
     return(
         <Form>
             <details>

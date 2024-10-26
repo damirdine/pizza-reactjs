@@ -30,9 +30,8 @@ const Cart = ({ pizzaData, cartItems, setCartItems }: CartProps) => {
   const [show, setShow] = useState(false);
 
   const getPrice = (CartItem: CartItemType) => {
-    const prices = pizzaData.find(
-      (pizza) => pizza.name === CartItem.name
-    )?.prices[0];
+    const prices = pizzaData.find((pizza) => pizza.name === CartItem.name)
+      ?.prices[0];
     if (prices && CartItem.size in prices) {
       CartItem.price = prices[CartItem.size];
     }
@@ -42,7 +41,8 @@ const Cart = ({ pizzaData, cartItems, setCartItems }: CartProps) => {
   useEffect(() => {
     return setTotalCart(
       cartItems.reduce(
-        (totalCart: number, item:CartItemType) => totalCart + item?.price * item.quantity,
+        (totalCart: number, item: CartItemType) =>
+          totalCart + item?.price * item.quantity,
         0
       )
     );
@@ -60,14 +60,13 @@ const Cart = ({ pizzaData, cartItems, setCartItems }: CartProps) => {
     <Container className="mt-4">
       <h1 className="mb-4">Cart</h1>
       {cartItems.length === 0 && (
-        <h3 gap={3} className="text-center">
+        <h3 className="text-center">
           Panier vide
         </h3>
       )}
       <Row className="mb-3">
         {cartItems.map((item: any) => (
           <CartItem
-            className="mb-3"
             item={item}
             deleteFromCart={deleteFromCart}
             updateQuantity={updateQuantity}
