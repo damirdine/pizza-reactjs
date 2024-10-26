@@ -29,7 +29,7 @@ function App() {
     }
   };
   return (
-    <BrowserRouter basename={"/pizza-reactjs"}>
+    <BrowserRouter basename={"/pizza-reactjs/"}>
       <TopBar />
       <NavBar cartItems={cartItems} UserLogged={null} />
       <Routes>
