@@ -1,7 +1,9 @@
+type PizzaSizeType = "small" | "medium" | "large";
+
 export type CartItemType = {
   price: number;
   name: string;
-  size: string;
+  size: PizzaSizeType;
   quantity: number;
 };
 

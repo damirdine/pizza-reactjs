@@ -3,39 +3,37 @@ import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AdressFrom from "../components/AdressFrom";
+import { useState } from "react";
 
 function Register() {
-  async function addUser(e) {
-    let fullname = document.querySelector("#formBasicFullName").value;
-    let email = document.querySelector("#formBasicEmail").value;
-    let password = document.querySelector("#formBasicPassword").value;
-    let confirmPassword = document.querySelector(
-      "#formBasicConfirmPassword"
-    ).value;
-    let phoneNumber = document.querySelector("#formGroupPhoneNumber")?.value;
-    let adress = document.querySelector("#formGroupAdress").value;
-    let complement = document.querySelector("#formGroupComplement").value;
-    let postCode = document.querySelector("#formGroupPostCode").value;
-    let city = document.querySelector("#formGroupCity").value;
+  const [formData, setFormData] = useState({
+    fullname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phoneNumber: "",
+    adress: "",
+    complement: "",
+    postCode: "",
+    city: "",
+  });
+  const updateField = (key: string, value: string) =>
+    setFormData((formData) => {
+      if (Object.keys(formData).includes(key)) {
+        formData[key] = value;
+      }
+      return { ...formData };
+    });
+  async function addUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      let res = await fetch("http://localhost:3000/users/register", {
+      const res = await fetch("http://localhost:3000/users/register", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          fullname: fullname,
-          email: email,
-          password: password,
-          confirmPassword: confirmPassword,
-          phoneNumber: phoneNumber,
-          adress: adress,
-          complement: complement,
-          postCode: postCode,
-          city: city,
-        }),
+        body: JSON.stringify(formData),
       });
       if (res.status === 200) {
         const { data } = await res.json();
@@ -53,11 +51,24 @@ function Register() {
       <Form onSubmit={addUser} className="mt-4" id="registerForm">
         <Form.Group className="mb-3" controlId="formBasicFullName">
           <Form.Label>Full name</Form.Label>
-          <Form.Control type="text" placeholder="Jhon Doe" />
+          <Form.Control
+            type="text"
+            placeholder="Jhon Doe"
+            name="fullname"
+            onChange={(e) => {
+              updateField("fullname", e.target.value);
+            }}
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            onChange={(e) => {
+              updateField("email", e.target.value);
+            }}
+          />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
@@ -68,11 +79,20 @@ function Register() {
             className="mb-2"
             type="password"
             placeholder="Password"
+            onChange={(e) => {
+              updateField("password", e.target.value);
+            }}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
           <Form.Label>Confirm password</Form.Label>
-          <Form.Control type="password" placeholder="Confirm password" />
+          <Form.Control
+            type="password"
+            placeholder="Confirm password"
+            onChange={(e) => {
+              updateField("confirmPassword", e.target.value);
+            }}
+          />
         </Form.Group>
         <details className="mb-3">
           <summary className="mb-3">

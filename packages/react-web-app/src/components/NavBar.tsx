@@ -1,12 +1,16 @@
 import Badge from "react-bootstrap/Badge";
 import { Navbar, Nav, Container, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
-const NavBar = ({ cartItems, UserLogged }) => {
+import { CartItemType } from "../types";
+type NavBarProps = {
+  cartItems: CartItemType[];
+  UserLogged: { user: { fullname: string }; loggedIn: boolean } | null;
+};
+const NavBar = ({ cartItems, UserLogged }: NavBarProps) => {
   return (
     <Navbar>
       <Container>
-        <Navbar.Brand to="/">
+        <Navbar.Brand target="/">
           <Image
             src="images/White_pizza-logo_250x250.jpg"
             style={{

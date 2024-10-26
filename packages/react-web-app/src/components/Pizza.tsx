@@ -1,29 +1,35 @@
 import { useState } from "react";
 import { Card, Button, Row, Col, Modal, Image } from "react-bootstrap";
+import { CartItemType, PizzaType } from "../types";
 
-const Pizza = ({ lapizza, addToCart }) => {
+type PizzaItem = Omit<CartItemType, "price">;
+type PizzaProps = {
+  lapizza: PizzaType;
+  addToCart: (item: PizzaItem) => void;
+};
+const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
   const [show, setShow] = useState(false);
   const [size, setSize] = useState("small");
   const [quantity, setQuantity] = useState(1);
-  const getSize = (e) => {
+  const getSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const size = e.target.value;
     setSize(size);
   };
-  const getQuantity = (e) => {
+  const getQuantity = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const quantity = e.target.value;
-    setQuantity(quantity);
+    setQuantity(parseInt(quantity));
   };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getcartItem = () => {
-    let cartItem = {
+  const getcartItem = (): PizzaItem => {
+    const cartItem = {
       name: lapizza.name,
       size: size,
-      quantity: parseInt(quantity),
+      quantity: quantity,
     };
-    return cartItem;
+    return cartItem as PizzaItem;
   };
   return (
     <>
@@ -52,7 +58,7 @@ const Pizza = ({ lapizza, addToCart }) => {
                     value={quantity}
                     onChange={getQuantity}
                   >
-                    {[...Array(10).keys()].map((v, i) => (
+                    {[...Array(10).keys()].map((_v, i) => (
                       <option value={i + 1}>{i + 1}</option>
                     ))}
                   </select>
