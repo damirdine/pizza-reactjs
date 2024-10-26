@@ -11,21 +11,13 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
 import { pizzas } from "./product.data";
+import { CartItemType } from "./types";
 
-type CartItem = {
-  name: string;
-  size: string;
-  quantity: number;
-};
 function App() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [pizzaData] = useState(pizzas);
 
-  const addToCart = (product: {
-    name: string;
-    size: string;
-    quantity: number;
-  }) => {
+  const addToCart = (product: CartItemType) => {
     const isExist = cartItems.find(
       (item) => item.name === product.name && item.size === product.size
     );

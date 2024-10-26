@@ -1,33 +1,52 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Button, Modal } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import GuestForm from "../components/GuestForm";
 import LoginForm from "../components/LoginForm";
-let Cart = ({ pizzaData, cartItems, deleteFromCart }) => {
-  const [effecter, setEffecter] = useState(0);
+import { CartItemType, PizzaType } from "../types";
+
+type CartProps = {
+  pizzaData: PizzaType[];
+  cartItems: CartItemType[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItemType[]>>;
+};
+
+const Cart = ({ pizzaData, cartItems, setCartItems }: CartProps) => {
+  const deleteFromCart = (name: string) => {
+    setCartItems((products) => products.filter((el) => el.name !== name));
+  };
+  const updateQuantity = (name: string, num: number) => {
+    setCartItems((products) => {
+      const item = products.find((el) => el.name === name);
+      if (item) {
+        item.quantity = item.quantity >= 1 && num > 0 ? item.quantity + num : 1;
+      }
+      return [...products];
+    });
+  };
+
   const [totalCart, setTotalCart] = useState(0);
   const [show, setShow] = useState(false);
 
-  const getPrice = (CartItem) => {
-    CartItem.price = pizzaData.find(
+  const getPrice = (CartItem: CartItemType) => {
+    const prices = pizzaData.find(
       (pizza) => pizza.name === CartItem.name
-    ).prices[0][CartItem.size];
+    )?.prices[0];
+    if (prices && CartItem.size in prices) {
+      CartItem.price = prices[CartItem.size];
+    }
   };
-  cartItems.map((CartItem) => {
-    getPrice(CartItem);
-  });
+  cartItems.map(getPrice);
 
   useEffect(() => {
-    setTotalCart(0);
-    setTotalCart(
+    return setTotalCart(
       cartItems.reduce(
-        (totalCart, item) => totalCart + item.price * item.quantity,
+        (totalCart: number, item:CartItemType) => totalCart + item?.price * item.quantity,
         0
       )
     );
-    setEffecter(0);
-  }, [effecter == 1, cartItems]);
+  }, [cartItems]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -46,12 +65,12 @@ let Cart = ({ pizzaData, cartItems, deleteFromCart }) => {
         </h3>
       )}
       <Row className="mb-3">
-        {cartItems.map((item) => (
+        {cartItems.map((item: any) => (
           <CartItem
             className="mb-3"
             item={item}
             deleteFromCart={deleteFromCart}
-            setEffecter={setEffecter}
+            updateQuantity={updateQuantity}
           />
         ))}
       </Row>
@@ -70,7 +89,7 @@ let Cart = ({ pizzaData, cartItems, deleteFromCart }) => {
             </Modal.Header>
             <Modal.Body>
               <h3>Login</h3>
-              <LoginForm />
+              <LoginForm setUserLogged={undefined} />
               <span className="d-block my-2">Or</span>
               <GuestForm />
             </Modal.Body>
