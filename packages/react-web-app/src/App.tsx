@@ -11,46 +11,22 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
 import { pizzas } from "./product.data";
+
+type CartItem = {
+  name: string;
+  size: string;
+  quantity: number;
+};
 function App() {
-  const [UserLogged, setUserLogged] = useState(async () => {
-    try {
-      let res = await fetch("http://localhost:8080/users/login", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.status === 200) {
-        let data = await res.json();
-        setUserLogged(data);
-      } else {
-        console.log("Some error occured", res);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  });
-  const [cartItems, setCartItems] = useState([]);
-  const [pizzaData, setPizzasData] = useState(pizzas);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [pizzaData] = useState(pizzas);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/pizzas")
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json();
-  //       }
-  //     })
-  //     .then((data) => {
-  //       setPizzasData(data);
-  //     })
-  //     .catch((e  rr) => {
-  //       console.log(err, "WE CATCH AN ERROR");
-  //     });
-  // }, []);
-
-  const addToCart = (product) => {
-    let isExist = cartItems.find(
+  const addToCart = (product: {
+    name: string;
+    size: string;
+    quantity: number;
+  }) => {
+    const isExist = cartItems.find(
       (item) => item.name === product.name && item.size === product.size
     );
     if (isExist) {
@@ -60,15 +36,10 @@ function App() {
       setCartItems([...cartItems, product]);
     }
   };
-
-  const deleteFromCart = (product) => {
-    setCartItems((products) => products.filter((_, index) => index !== 0));
-  };
-  console.log(UserLogged);
   return (
     <BrowserRouter>
       <TopBar />
-      <NavBar cartItems={cartItems} UserLogged={UserLogged} />
+      <NavBar cartItems={cartItems} UserLogged={null} />
       <Routes>
         <Route
           path="/"
@@ -90,7 +61,6 @@ function App() {
           element={
             <Cart
               cartItems={cartItems}
-              deleteFromCart={deleteFromCart}
               setCartItems={setCartItems}
               pizzaData={pizzaData}
             />
