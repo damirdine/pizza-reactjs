@@ -2,17 +2,16 @@ import { useState } from "react";
 import { Card, Button, Row, Col, Modal, Image } from "react-bootstrap";
 import { CartItemType, PizzaSizeType, PizzaType } from "../types";
 
-type PizzaItem = Omit<CartItemType, "price">;
 type PizzaProps = {
   lapizza: PizzaType;
-  addToCart: (item: PizzaItem) => void;
+  addToCart: (item: CartItemType) => void;
 };
 const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
   const [show, setShow] = useState(false);
   const [size, setSize] = useState<PizzaSizeType>("small");
   const [quantity, setQuantity] = useState(1);
   const getSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const size = e.target.value as PizzaSizeType ;
+    const size = e.target.value as PizzaSizeType;
     setSize(size);
   };
   const getQuantity = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -23,15 +22,16 @@ const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getcartItem = (): PizzaItem => {
+  const priceBySizeAndQuantity = lapizza.prices[0][size] * quantity;
+  const getcartItem = (): CartItemType => {
     const cartItem = {
       name: lapizza.name,
       size: size,
       quantity: quantity,
+      price: priceBySizeAndQuantity,
     };
-    return cartItem as PizzaItem;
+    return cartItem;
   };
-  const priceBySizeAndQuantity = lapizza.prices[0][size] * quantity;
   return (
     <>
       <Card className="mb-4">
