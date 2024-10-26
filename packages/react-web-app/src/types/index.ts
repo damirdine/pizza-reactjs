@@ -1,4 +1,4 @@
-type PizzaSizeType = "small" | "medium" | "large";
+export type PizzaSizeType = "small" | "medium" | "large";
 
 export type CartItemType = {
   price: number;

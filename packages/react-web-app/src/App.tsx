@@ -37,7 +37,6 @@ function App() {
           path="/"
           element={
             <Home
-              cartItems={cartItems}
               addToCart={addToCart}
               pizzaData={pizzaData}
             />

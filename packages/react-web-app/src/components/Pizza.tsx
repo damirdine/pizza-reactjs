@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card, Button, Row, Col, Modal, Image } from "react-bootstrap";
-import { CartItemType, PizzaType } from "../types";
+import { CartItemType, PizzaSizeType, PizzaType } from "../types";
 
 type PizzaItem = Omit<CartItemType, "price">;
 type PizzaProps = {
@@ -9,10 +9,10 @@ type PizzaProps = {
 };
 const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
   const [show, setShow] = useState(false);
-  const [size, setSize] = useState("small");
+  const [size, setSize] = useState<PizzaSizeType>("small");
   const [quantity, setQuantity] = useState(1);
   const getSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const size = e.target.value;
+    const size = e.target.value as PizzaSizeType ;
     setSize(size);
   };
   const getQuantity = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -31,6 +31,7 @@ const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
     };
     return cartItem as PizzaItem;
   };
+  const priceBySizeAndQuantity = lapizza.prices[0][size] * quantity;
   return (
     <>
       <Card className="mb-4">
@@ -68,7 +69,7 @@ const Pizza = ({ lapizza, addToCart }: PizzaProps) => {
           </Card.Text>
           <Row>
             <Col md={6}>
-              <p>Price : {lapizza.prices[0][size] * quantity} €</p>
+              <p>Price : {priceBySizeAndQuantity} €</p>
             </Col>
             <Col md={6}>
               <Button

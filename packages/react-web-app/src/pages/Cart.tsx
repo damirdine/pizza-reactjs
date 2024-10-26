@@ -88,7 +88,7 @@ const Cart = ({ pizzaData, cartItems, setCartItems }: CartProps) => {
             </Modal.Header>
             <Modal.Body>
               <h3>Login</h3>
-              <LoginForm setUserLogged={undefined} />
+              <LoginForm />
               <span className="d-block my-2">Or</span>
               <GuestForm />
             </Modal.Body>

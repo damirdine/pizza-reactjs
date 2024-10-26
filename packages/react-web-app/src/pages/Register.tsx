@@ -17,7 +17,11 @@ function Register() {
     postCode: "",
     city: "",
   });
-  const updateField = (key: string, value: string) =>
+
+  type FormDataType = typeof formData;
+  type FormDataKey = keyof FormDataType;
+  
+  const updateField = (key: FormDataKey, value: string) =>
     setFormData((formData) => {
       if (Object.keys(formData).includes(key)) {
         formData[key] = value;
