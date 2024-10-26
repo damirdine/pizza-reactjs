@@ -9,7 +9,6 @@
 
     "build:api": "npm run build --workspace=api",
     "build:front": "npm run build --workspace=react-web-app"
-    
   },
   "private": true,
   "workspaces": [

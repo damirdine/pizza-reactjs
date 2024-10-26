@@ -3,13 +3,16 @@ name: Deploy Frontend
 on:
   push:
     branches:
-      - main  # Déclenche l'action seulement sur la branche main.
+      - main # Déclenche l'action seulement sur la branche main.
       - nestjs-migration
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      DEPLOY_TO: "GH"
+      
     steps:
       # Étape 1 : Checkout du code
       - name: Checkout repository
@@ -19,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '^20.11'
+          node-version: "20.x"
 
       # Étape 3 : Installer les dépendances
       - name: Install dependencies
@@ -34,5 +37,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/
-          publish_branch: gh-pages  # Branche pour les fichiers de build
+          publish_dir: ./frontend
+          publish_branch: gh-pages # Branche pour les fichiers de build
