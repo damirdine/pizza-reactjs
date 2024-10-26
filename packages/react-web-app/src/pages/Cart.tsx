@@ -65,7 +65,7 @@ const Cart = ({ pizzaData, cartItems, setCartItems }: CartProps) => {
         </h3>
       )}
       <Row className="mb-3">
-        {cartItems.map((item: any) => (
+        {cartItems.map((item) => (
           <CartItem
             item={item}
             deleteFromCart={deleteFromCart}
